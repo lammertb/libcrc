@@ -51,9 +51,9 @@
 
 
 
-void main( int argc, char *argv[] ) {
+int main( int argc, char *argv[] ) {
 
-	unsigned char input_string[MAX_STRING_SIZE];
+	char input_string[MAX_STRING_SIZE];
 	unsigned char *ptr;
 	unsigned char *dest;
 	unsigned char hex_val;
@@ -101,15 +101,15 @@ void main( int argc, char *argv[] ) {
 
 	if ( do_ascii ) {
 
-		ptr = input_string;
+		ptr = (unsigned char *) input_string;
 		while ( *ptr  &&  *ptr != '\r'  &&  *ptr != '\n' ) ptr++;
 		*ptr = 0;
 	}
 
 	if ( do_hex ) {
 
-		ptr  = input_string;
-		dest = input_string;
+		ptr  = (unsigned char *) input_string;
+		dest = (unsigned char *) input_string;
 
 		while( *ptr  &&  *ptr != '\r'  &&  *ptr != '\n' ) {
 
@@ -145,7 +145,7 @@ void main( int argc, char *argv[] ) {
 		if ( do_ascii ) {
 
 			prev_byte = 0;
-			ptr       = input_string;
+			ptr       = (unsigned char *) input_string;
 
 			while ( *ptr ) {
 
@@ -169,7 +169,7 @@ void main( int argc, char *argv[] ) {
 		else if ( do_hex ) {
 
 			prev_byte = 0;
-			ptr       = input_string;
+			ptr       = (unsigned char *) input_string;
 
 			while ( *ptr != '\x80' ) {
 
@@ -270,5 +270,7 @@ void main( int argc, char *argv[] ) {
 		a++;
 
 	} while ( a < argc );
+
+	return 0;
 
 }  /* main (tstcrc.c) */
