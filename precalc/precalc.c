@@ -153,10 +153,10 @@ static int generate_table( const char *typename, const char *filename ) {
 
 		switch ( bits ) {
 
-			case  8 : fprintf( fp, "\t0x%02"  PRIX64 "u",   crc_tab_precalc[a] & 0x00000000000000FFull ); break;
-			case 16 : fprintf( fp, "\t0x%04"  PRIX64 "u",   crc_tab_precalc[a] & 0x000000000000FFFFull ); break;
-			case 32 : fprintf( fp, "\t0x%08"  PRIX64 "ul",  crc_tab_precalc[a] & 0x00000000FFFFFFFFull ); break;
-			case 64 : fprintf( fp, "\t0x%016" PRIX64 "ull", crc_tab_precalc[a]                         ); break;
+			case  8 : fprintf( fp, "\t0x%02"  PRIX8  "\x75",   (uint8_t)  (crc_tab_precalc[a] & 0x00000000000000FFull) ); break;
+			case 16 : fprintf( fp, "\t0x%04"  PRIX16 "\x75",   (uint16_t) (crc_tab_precalc[a] & 0x000000000000FFFFull) ); break;
+			case 32 : fprintf( fp, "\t0x%08"  PRIX32 "\x75l",  (uint32_t) (crc_tab_precalc[a] & 0x00000000FFFFFFFFull) ); break;
+			case 64 : fprintf( fp, "\t0x%016" PRIX64 "\x75ll",             crc_tab_precalc[a]                          ); break;
 		}
 		if ( a < 255 ) fprintf( fp, ",\n" );
 		else           fprintf( fp, "\n" );
