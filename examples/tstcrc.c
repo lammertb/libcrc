@@ -58,18 +58,19 @@ int main( int argc, char *argv[] ) {
 	unsigned char *dest;
 	unsigned char hex_val;
 	unsigned char prev_byte;
-	uint16_t crc_16;
-	uint16_t crc_16_modbus;
-	uint16_t crc_ccitt_ffff;
-	uint16_t crc_ccitt_0000;
-	uint16_t crc_ccitt_1d0f;
-	uint16_t crc_dnp;
-	uint16_t crc_sick;
-	uint16_t crc_kermit;
+	uint16_t crc_16_val;
+	uint16_t crc_16_modbus_val;
+	uint16_t crc_ccitt_ffff_val;
+	uint16_t crc_ccitt_0000_val;
+	uint16_t crc_ccitt_1d0f_val;
+	uint16_t crc_dnp_val;
+	uint16_t crc_sick_val;
+	uint16_t crc_kermit_val;
+	uint32_t crc_32_val;
 	uint16_t low_byte;
 	uint16_t high_byte;
-	uint32_t crc_32;
-	int a, ch;
+	int a;
+	int ch;
 	bool do_ascii;
 	bool do_hex;
 	FILE *fp;
@@ -130,15 +131,15 @@ int main( int argc, char *argv[] ) {
 
 	do {
 
-		crc_16         = 0x0000;
-		crc_16_modbus  = 0xffff;
-		crc_dnp        = 0x0000;
-		crc_sick       = 0x0000;
-		crc_ccitt_0000 = 0x0000;
-		crc_ccitt_ffff = 0xffff;
-		crc_ccitt_1d0f = 0x1d0f;
-		crc_kermit     = 0x0000;
-		crc_32         = 0xffffffffL;
+		crc_16_val         = 0x0000;
+		crc_16_modbus_val  = 0xffff;
+		crc_dnp_val        = 0x0000;
+		crc_sick_val       = 0x0000;
+		crc_ccitt_0000_val = 0x0000;
+		crc_ccitt_ffff_val = 0xffff;
+		crc_ccitt_1d0f_val = 0x1d0f;
+		crc_kermit_val     = 0x0000;
+		crc_32_val         = 0xffffffffL;
 
 
 
@@ -149,15 +150,15 @@ int main( int argc, char *argv[] ) {
 
 			while ( *ptr ) {
 
-				crc_16         = update_crc_16(     crc_16,         *ptr            );
-				crc_16_modbus  = update_crc_16(     crc_16_modbus,  *ptr            );
-				crc_dnp        = update_crc_dnp(    crc_dnp,        *ptr            );
-				crc_sick       = update_crc_sick(   crc_sick,       *ptr, prev_byte );
-				crc_ccitt_0000 = update_crc_ccitt(  crc_ccitt_0000, *ptr            );
-				crc_ccitt_ffff = update_crc_ccitt(  crc_ccitt_ffff, *ptr            );
-				crc_ccitt_1d0f = update_crc_ccitt(  crc_ccitt_1d0f, *ptr            );
-				crc_kermit     = update_crc_kermit( crc_kermit,     *ptr            );
-				crc_32         = update_crc_32(     crc_32,         *ptr            );
+				crc_16_val         = update_crc_16(     crc_16_val,         *ptr            );
+				crc_16_modbus_val  = update_crc_16(     crc_16_modbus_val,  *ptr            );
+				crc_dnp_val        = update_crc_dnp(    crc_dnp_val,        *ptr            );
+				crc_sick_val       = update_crc_sick(   crc_sick_val,       *ptr, prev_byte );
+				crc_ccitt_0000_val = update_crc_ccitt(  crc_ccitt_0000_val, *ptr            );
+				crc_ccitt_ffff_val = update_crc_ccitt(  crc_ccitt_ffff_val, *ptr            );
+				crc_ccitt_1d0f_val = update_crc_ccitt(  crc_ccitt_1d0f_val, *ptr            );
+				crc_kermit_val     = update_crc_kermit( crc_kermit_val,     *ptr            );
+				crc_32_val         = update_crc_32(     crc_32_val,         *ptr            );
 
 				prev_byte = *ptr;
 				ptr++;
@@ -176,15 +177,15 @@ int main( int argc, char *argv[] ) {
 				hex_val  = (unsigned char) ( ( * ptr     &  '\x0f' ) << 4 );
 				hex_val |= (unsigned char) ( ( *(ptr+1)  &  '\x0f' )      );
 
-				crc_16         = update_crc_16(     crc_16,         hex_val            );
-				crc_16_modbus  = update_crc_16(     crc_16_modbus,  hex_val            );
-				crc_dnp        = update_crc_dnp(    crc_dnp,        hex_val            );
-				crc_sick       = update_crc_sick(   crc_sick,       hex_val, prev_byte );
-				crc_ccitt_0000 = update_crc_ccitt(  crc_ccitt_0000, hex_val            );
-				crc_ccitt_ffff = update_crc_ccitt(  crc_ccitt_ffff, hex_val            );
-				crc_ccitt_1d0f = update_crc_ccitt(  crc_ccitt_1d0f, hex_val            );
-				crc_kermit     = update_crc_kermit( crc_kermit,     hex_val            );
-				crc_32         = update_crc_32(     crc_32,         hex_val            );
+				crc_16_val         = update_crc_16(     crc_16_val,         hex_val            );
+				crc_16_modbus_val  = update_crc_16(     crc_16_modbus_val,  hex_val            );
+				crc_dnp_val        = update_crc_dnp(    crc_dnp_val,        hex_val            );
+				crc_sick_val       = update_crc_sick(   crc_sick_val,       hex_val, prev_byte );
+				crc_ccitt_0000_val = update_crc_ccitt(  crc_ccitt_0000_val, hex_val            );
+				crc_ccitt_ffff_val = update_crc_ccitt(  crc_ccitt_ffff_val, hex_val            );
+				crc_ccitt_1d0f_val = update_crc_ccitt(  crc_ccitt_1d0f_val, hex_val            );
+				crc_kermit_val     = update_crc_kermit( crc_kermit_val,     hex_val            );
+				crc_32_val         = update_crc_32(     crc_32_val,         hex_val            );
 
 				prev_byte = hex_val;
 				ptr      += 2;
@@ -209,15 +210,15 @@ int main( int argc, char *argv[] ) {
 
 				while( ( ch=fgetc( fp ) ) != EOF ) {
 
-					crc_16         = update_crc_16(     crc_16,         (unsigned char) ch            );
-					crc_16_modbus  = update_crc_16(     crc_16_modbus,  (unsigned char) ch            );
-					crc_dnp        = update_crc_dnp(    crc_dnp,        (unsigned char) ch            );
-					crc_sick       = update_crc_sick(   crc_sick,       (unsigned char) ch, prev_byte );
-					crc_ccitt_0000 = update_crc_ccitt(  crc_ccitt_0000, (unsigned char) ch            );
-					crc_ccitt_ffff = update_crc_ccitt(  crc_ccitt_ffff, (unsigned char) ch            );
-					crc_ccitt_1d0f = update_crc_ccitt(  crc_ccitt_1d0f, (unsigned char) ch            );
-					crc_kermit     = update_crc_kermit( crc_kermit,     (unsigned char) ch            );
-					crc_32         = update_crc_32(     crc_32,         (unsigned char) ch            );
+					crc_16_val         = update_crc_16(     crc_16_val,         (unsigned char) ch            );
+					crc_16_modbus_val  = update_crc_16(     crc_16_modbus_val,  (unsigned char) ch            );
+					crc_dnp_val        = update_crc_dnp(    crc_dnp_val,        (unsigned char) ch            );
+					crc_sick_val       = update_crc_sick(   crc_sick_val,       (unsigned char) ch, prev_byte );
+					crc_ccitt_0000_val = update_crc_ccitt(  crc_ccitt_0000_val, (unsigned char) ch            );
+					crc_ccitt_ffff_val = update_crc_ccitt(  crc_ccitt_ffff_val, (unsigned char) ch            );
+					crc_ccitt_1d0f_val = update_crc_ccitt(  crc_ccitt_1d0f_val, (unsigned char) ch            );
+					crc_kermit_val     = update_crc_kermit( crc_kermit_val,     (unsigned char) ch            );
+					crc_32_val         = update_crc_32(     crc_32_val,         (unsigned char) ch            );
 
 					prev_byte = (unsigned char) ch;
 				}
@@ -230,20 +231,20 @@ int main( int argc, char *argv[] ) {
 
 
 
-		crc_32    ^= 0xffffffffL;
+		crc_32_val        ^= 0xffffffffL;
 
-		crc_dnp    = ~crc_dnp;
-		low_byte   = (crc_dnp    & 0xff00) >> 8;
-		high_byte  = (crc_dnp    & 0x00ff) << 8;
-		crc_dnp    = low_byte | high_byte;
+		crc_dnp_val    = ~crc_dnp_val;
+		low_byte       = (crc_dnp_val    & 0xff00) >> 8;
+		high_byte      = (crc_dnp_val    & 0x00ff) << 8;
+		crc_dnp_val    = low_byte | high_byte;
 
-		low_byte   = (crc_sick   & 0xff00) >> 8;
-		high_byte  = (crc_sick   & 0x00ff) << 8;
-		crc_sick   = low_byte | high_byte;
+		low_byte       = (crc_sick_val   & 0xff00) >> 8;
+		high_byte      = (crc_sick_val   & 0x00ff) << 8;
+		crc_sick_val   = low_byte | high_byte;
 
-		low_byte   = (crc_kermit & 0xff00) >> 8;
-		high_byte  = (crc_kermit & 0x00ff) << 8;
-		crc_kermit = low_byte | high_byte;
+		low_byte       = (crc_kermit_val & 0xff00) >> 8;
+		high_byte      = (crc_kermit_val & 0x00ff) << 8;
+		crc_kermit_val = low_byte | high_byte;
 
 		printf( "%s%s%s :\nCRC16              = 0x%04" PRIX16 "      /  %" PRIu16 "\n"
 				  "CRC16 (Modbus)     = 0x%04" PRIX16 "      /  %" PRIu16 "\n"
@@ -257,15 +258,15 @@ int main( int argc, char *argv[] ) {
 				, (   do_ascii  ||    do_hex ) ? "\""    : ""
 				, ( ! do_ascii  &&  ! do_hex ) ? argv[a] : input_string
 				, (   do_ascii  ||    do_hex ) ? "\""    : ""
-				, crc_16,         crc_16
-				, crc_16_modbus,  crc_16_modbus
-				, crc_sick,       crc_sick
-				, crc_ccitt_0000, crc_ccitt_0000
-				, crc_ccitt_ffff, crc_ccitt_ffff
-				, crc_ccitt_1d0f, crc_ccitt_1d0f
-				, crc_kermit,     crc_kermit
-				, crc_dnp,        crc_dnp
-				, crc_32,         crc_32     );
+				, crc_16_val,         crc_16_val
+				, crc_16_modbus_val,  crc_16_modbus_val
+				, crc_sick_val,       crc_sick_val
+				, crc_ccitt_0000_val, crc_ccitt_0000_val
+				, crc_ccitt_ffff_val, crc_ccitt_ffff_val
+				, crc_ccitt_1d0f_val, crc_ccitt_1d0f_val
+				, crc_kermit_val,     crc_kermit_val
+				, crc_dnp_val,        crc_dnp_val
+				, crc_32_val,         crc_32_val     );
 
 		a++;
 
