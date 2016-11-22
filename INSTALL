@@ -5,11 +5,11 @@ types of checksums. This includes the commonly known CRCs, but also some more
 exotic routines like a CRC implementation used in Sick sensors which uses a
 double CRC pass and routines to calculate the checksum for NMEA GPS messages.
 
-The routines can be used on a variety of hardware and software configurations.
-This has influenced the way the installation takes place. The library is
-licensed according to the MIT license. You can find more details about this
-license in the LICENSE file, and in the header of each source file.
+The library is licensed according to the MIT license. You can find more details
+about this license in the LICENSE file, and in the header of each source file.
 
+The routines can be used on a variety of hardware and software configurations.
+This has influenced the way the installation takes place.
 
 
 Installing the source files
