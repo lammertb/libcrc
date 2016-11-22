@@ -1,4 +1,4 @@
-# Multi platform MIT licenced CRC library libcrc in C
+# Libcrc - A multi platform MIT licenced CRC library in C
 
 Libcrc is a multi platform CRC library which has been under development since
 1999. The original version of the source code has been available on [www.lammertbies.nl](https://www.lammertbies.nl/downloads/)
