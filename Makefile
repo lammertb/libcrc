@@ -1,6 +1,9 @@
 #
 # Library: libcrc
-# Version: 2.00
+# File:    Makefile
+# Author:  Lammert Bies
+#
+#
 #
 # This file is licensed under the MIT License as stated below
 #
@@ -71,13 +74,13 @@
 
 
 
-INCDIR = include/
-LIBDIR = lib/
-OBJDIR = obj/
-SRCDIR = src/
-TSTDIR = test/
-
 ifeq ($(OS),Windows_NT)
+
+INCDIR = include\\
+LIBDIR = lib\\
+OBJDIR = obj\\
+SRCDIR = src\\
+TSTDIR = test\\
 
 CC     = cl
 LINK   = link
@@ -96,6 +99,12 @@ CFLAGS = -Ox -Ot -MT -GT -volatile:iso -I${INCDIR} -nologo -J -sdl -Wall -WX \
 	-wd4464 -wd4710 -wd4711 -wd4201 -wd4820
 
 else
+
+INCDIR = include/
+LIBDIR = lib/
+OBJDIR = obj/
+SRCDIR = src/
+TSTDIR = test/
 
 CC     = cc
 LINK   = cc
@@ -148,7 +157,7 @@ all:							\
 clean:
 	${RM} ${OBJDIR}*${OBJEXT}
 	${RM} ${TSTDIR}${OBJDIR}*${OBJEXT}
-	${RM} ${LIBDIR}libown${LIBEXT}
+	${RM} ${LIBDIR}libcrc${LIBEXT}
 	${RM} testall${EXEEXT}
 
 
@@ -168,9 +177,8 @@ testall${EXEEXT} :					\
 		${TSTDIR}${OBJDIR}testall${OBJEXT}	\
 		${TSTDIR}${OBJDIR}testcrc${OBJEXT}	\
 		${TSTDIR}${OBJDIR}testnmea${OBJEXT}	\
-		${LIBDIR}libown${LIBEXT}		\
-		${LIBSYS}
-	${STRIP} testcrc${EXEEXT}
+		${LIBDIR}libcrc${LIBEXT}
+	${STRIP} testall${EXEEXT}
 
 
 
