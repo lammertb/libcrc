@@ -1,9 +1,10 @@
 # Libcrc - A multi platform MIT licenced CRC library in C
 
 Libcrc is a multi platform CRC library which has been under development since
-1999. The original version of the source code has been available on [www.lammertbies.nl](https://www.lammertbies.nl/downloads/)
+1999. The original version of the source code has been available on [www.lammertbies.nl](https://www.lammertbies.nl/)
 since that time. Recently that code was merged with further previously unpublished
 developments and that library is now available at [Github](https://github.com/lammertb/libcrc/)
+An online version of the CRC calculation routines is also availabie at [www.lammertbies.nlr](https://www.lammertbies.nl/comm/info/crc-calculation.html)
 
 ## License
 
@@ -13,10 +14,10 @@ useful in open and closed source products independent of their licensing scheme.
 
 ## Platforms
 
-Since the first version the source code has been used on many platforms ranging from 8 bit micro controllers
+Since the first version, the source code has been compiled and used on many platforms ranging from 8 bit micro controllers
 to 64 bit multi core servers. Most platform dependent issues should therefore have been ironed out. Currently
 the code is developed and maintained mainly in 32 bit and 64 bit environments. New versions of the code are
-regularly compiled and checked on the following systems
+regularly compiled and checked on the systems mentioned in the following lists.
 
 ### 32 bit development environments
 |Operating System|Compiler|
