@@ -53,11 +53,11 @@
 
 void main( int argc, char *argv[] ) {
 
-	char input_string[MAX_STRING_SIZE];
-	char *ptr;
-	char *dest;
-	char hex_val;
-	char prev_byte;
+	unsigned char input_string[MAX_STRING_SIZE];
+	unsigned char *ptr;
+	unsigned char *dest;
+	unsigned char hex_val;
+	unsigned char prev_byte;
 	uint16_t crc_16;
 	uint16_t crc_16_modbus;
 	uint16_t crc_ccitt_ffff;
@@ -113,9 +113,9 @@ void main( int argc, char *argv[] ) {
 
 		while( *ptr  &&  *ptr != '\r'  &&  *ptr != '\n' ) {
 
-			if ( *ptr >= '0'  &&  *ptr <= '9' ) *dest++ = (char) ( (*ptr) - '0'      );
-			if ( *ptr >= 'A'  &&  *ptr <= 'F' ) *dest++ = (char) ( (*ptr) - 'A' + 10 );
-			if ( *ptr >= 'a'  &&  *ptr <= 'f' ) *dest++ = (char) ( (*ptr) - 'a' + 10 );
+			if ( *ptr >= '0'  &&  *ptr <= '9' ) *dest++ = (unsigned char) ( (*ptr) - '0'      );
+			if ( *ptr >= 'A'  &&  *ptr <= 'F' ) *dest++ = (unsigned char) ( (*ptr) - 'A' + 10 );
+			if ( *ptr >= 'a'  &&  *ptr <= 'f' ) *dest++ = (unsigned char) ( (*ptr) - 'a' + 10 );
 
 			ptr++;
 		}
@@ -173,8 +173,8 @@ void main( int argc, char *argv[] ) {
 
 			while ( *ptr != '\x80' ) {
 
-				hex_val  = (char) ( ( * ptr     &  '\x0f' ) << 4 );
-				hex_val |= (char) ( ( *(ptr+1)  &  '\x0f' )      );
+				hex_val  = (unsigned char) ( ( * ptr     &  '\x0f' ) << 4 );
+				hex_val |= (unsigned char) ( ( *(ptr+1)  &  '\x0f' )      );
 
 				crc_16         = update_crc_16(     crc_16,         hex_val            );
 				crc_16_modbus  = update_crc_16(     crc_16_modbus,  hex_val            );
@@ -209,17 +209,17 @@ void main( int argc, char *argv[] ) {
 
 				while( ( ch=fgetc( fp ) ) != EOF ) {
 
-					crc_16         = update_crc_16(     crc_16,         (char) ch            );
-					crc_16_modbus  = update_crc_16(     crc_16_modbus,  (char) ch            );
-					crc_dnp        = update_crc_dnp(    crc_dnp,        (char) ch            );
-					crc_sick       = update_crc_sick(   crc_sick,       (char) ch, prev_byte );
-					crc_ccitt_0000 = update_crc_ccitt(  crc_ccitt_0000, (char) ch            );
-					crc_ccitt_ffff = update_crc_ccitt(  crc_ccitt_ffff, (char) ch            );
-					crc_ccitt_1d0f = update_crc_ccitt(  crc_ccitt_1d0f, (char) ch            );
-					crc_kermit     = update_crc_kermit( crc_kermit,     (char) ch            );
-					crc_32         = update_crc_32(     crc_32,         (char) ch            );
+					crc_16         = update_crc_16(     crc_16,         (unsigned char) ch            );
+					crc_16_modbus  = update_crc_16(     crc_16_modbus,  (unsigned char) ch            );
+					crc_dnp        = update_crc_dnp(    crc_dnp,        (unsigned char) ch            );
+					crc_sick       = update_crc_sick(   crc_sick,       (unsigned char) ch, prev_byte );
+					crc_ccitt_0000 = update_crc_ccitt(  crc_ccitt_0000, (unsigned char) ch            );
+					crc_ccitt_ffff = update_crc_ccitt(  crc_ccitt_ffff, (unsigned char) ch            );
+					crc_ccitt_1d0f = update_crc_ccitt(  crc_ccitt_1d0f, (unsigned char) ch            );
+					crc_kermit     = update_crc_kermit( crc_kermit,     (unsigned char) ch            );
+					crc_32         = update_crc_32(     crc_32,         (unsigned char) ch            );
 
-					prev_byte = (char) ch;
+					prev_byte = (unsigned char) ch;
 				}
 
 				fclose( fp );
