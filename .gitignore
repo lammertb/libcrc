@@ -6,6 +6,10 @@ obj/*.obj
 obj/*.o
 test/obj/*.obj
 test/obj/*.o
+examples/obj/*.obj
+examples/obj/*.o
 make.exe
 testall.exe
 testall
+tstcrc.exe
+tstcrc

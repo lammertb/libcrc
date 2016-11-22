@@ -1,16 +1,17 @@
-# Usage of the libcrc library
+# Usage of the CRC functions
 
 The source files in the libcrc directory structure contain source code
 for functions to calculate several commonly used CRC values: **CRC-8**,
 **CRC-16**, **CRC-32**, **CRC-DNP**, **CRC-SICK**, **CRC-Kermit** and **CRC-CCITT**.
 
-The functions can be freely used according to the MIT licence. The text of
+The functions can be freely used in open en closed source applications due to the permissive MIT license. The text of
 the license can be found in the `LICENSE` file in the root of the
 directory tree.
 
 ## Calculating a CRC value
 
-To calculate a CRC, the following steps must be followed:
+A CRC is a single or multi byte value calculated from the contents of
+an array of bytes. The following steps must be followed to calculate a CRC:
 
 1. Initialize the CRC value. For CRC-16, CRC-SICK CRC-Kermit and CRC-DNP
 the initial value of the CRC is `0x0000`. For CRC-CCITT and CRC-MODBUS,
@@ -34,9 +35,10 @@ are swapped.
 
 ## Example program `tstcrc`
 
-An example of this calculation process can be found in the tstcrc.c
-sample program in the example subdirectory. This file is compiled to
-an executable when the library make process is invoked with `make`. The program and other CRC implementations can be
+An example of this calculation process can be found in the **`tstcrc.c`**
+sample source file in the examples subdirectory. This file is automatically compiled to
+an executable when the library make process is invoked with **`make`**. In general this example
+program and other CRC implementations can be
 tested with the test string "**123456789**" without the quotes. The
 results should be:
 
@@ -52,7 +54,7 @@ results should be:
 |**CRC-DNP**|`82EA`|
 |**CRC32**|`CBF43926`|
 
-The example program `tstcrc` can be invoked in three ways:
+The example program **`tstcrc`** can be invoked in three ways:
 
 **`tstcrc -a`**
 
@@ -99,7 +101,7 @@ the same in both cases.
 
 **`tst_crc file1 file2 ...`**
 
-If neither the **-a**, nor the **-x** parameter is used, the test program
+If neither the **`-a`**, nor the **`-x`** parameter is used, the test program
 assumes that the parameters are file names. Each file is opened and
 the CRC values are calculated.
 

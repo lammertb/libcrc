@@ -81,6 +81,7 @@ LIBDIR = lib\\
 OBJDIR = obj\\
 SRCDIR = src\\
 TSTDIR = test\\
+EXADIR = examples\\
 
 CC     = cl
 LINK   = link
@@ -105,6 +106,7 @@ LIBDIR = lib/
 OBJDIR = obj/
 SRCDIR = src/
 TSTDIR = test/
+EXADIR = examples/
 
 CC     = cc
 LINK   = cc
@@ -137,16 +139,21 @@ ${OBJDIR}%${OBJEXT} : ${SRCDIR}%.c
 ${TSTDIR}${OBJDIR}%${OBJEXT} : ${TSTDIR}%.c
 	${CC} -c ${CFLAGS} ${OFLAG}$@ $<
 
+${EXADIR}${OBJDIR}%${OBJEXT} : ${EXADIR}%.c
+	${CC} -c ${CFLAGS} ${OFLAG}$@ $<
 
 
 
-# The make file is used to compile both the library, and a test program to
-# verify the functionality of the checksum algorithms after compilation.
+#
+# The make file is used to compile the library, a test program to verify the
+# functionality of the checksum algorithms after compilation and example
+# programs.
 #
 
 all:							\
 	${LIBDIR}libcrc${LIBEXT}			\
-	testall${EXEEXT}
+	testall${EXEEXT}				\
+	tstcrc${EXEEXT}
 
 
 
@@ -156,9 +163,11 @@ all:							\
 
 clean:
 	${RM} ${OBJDIR}*${OBJEXT}
+	${RM} ${EXADIR}${OBJDIR}*${OBJEXT}
 	${RM} ${TSTDIR}${OBJDIR}*${OBJEXT}
 	${RM} ${LIBDIR}libcrc${LIBEXT}
 	${RM} testall${EXEEXT}
+	${RM} tstcrc${EXEEXT}
 
 
 
@@ -179,6 +188,20 @@ testall${EXEEXT} :					\
 		${TSTDIR}${OBJDIR}testnmea${OBJEXT}	\
 		${LIBDIR}libcrc${LIBEXT}
 	${STRIP} testall${EXEEXT}
+
+#
+# The tstcrc program can be run to calculate the CRC values of manual input or
+# of the contents of one or more files.
+#
+
+tstcrc${EXEEXT} :					\
+		${EXADIR}${OBJDIR}tstcrc${OBJEXT}	\
+		${LIBDIR}libcrc${LIBEXT}		\
+		Makefile
+	${LINK}	${XFLAG}tstcrc${EXEEXT}			\
+		${EXADIR}${OBJDIR}tstcrc${OBJEXT}	\
+		${LIBDIR}libcrc${LIBEXT}
+	${STRIP} tstcrc${EXEEXT}
 
 
 
@@ -229,6 +252,8 @@ ${OBJDIR}crckrmit${OBJEXT}		: ${SRCDIR}crckrmit.c ${INCDIR}checksum.h
 ${OBJDIR}crcsick${OBJEXT}		: ${SRCDIR}crcsick.c ${INCDIR}checksum.h
 
 ${OBJDIR}nmea-chk${OBJEXT}		: ${SRCDIR}nmea-chk.c ${INCDIR}checksum.h
+
+${EXADIR}${OBJDIR}tstcrc${OBJEXT}	: ${EXADIR}tstcrc.c ${INCDIR}checksum.h
 
 ${TSTDIR}${OBJDIR}testall${OBJEXT}	: ${TSTDIR}testall.c ${TSTDIR}testall.h
 
