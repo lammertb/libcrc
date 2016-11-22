@@ -1,1 +1,11 @@
 *~
+.*.swp
+lib/*.lib
+lib/*.a
+obj/*.obj
+obj/*.o
+test/obj/*.obj
+test/obj/*.o
+make.exe
+testall.exe
+testall
