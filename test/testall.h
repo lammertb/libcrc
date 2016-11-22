@@ -3,14 +3,7 @@
  * File:    test/testall.h
  * Author:  Lammert Bies
  *
- *
- *
  * This file is licensed under the MIT License as stated below
- *
- *
- *
- * License
- * -------
  *
  * Copyright (c) 2008-2016 Lammert Bies
  *
@@ -32,21 +25,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- *
- *
  * Description
  * -----------
- *
  * The source file test/testall.h contains definitions and prototypes that are
  * used by the testall program which checks the proper compilation of the
  * libcrc routines on a specific platform.
  */
 
-
-
 #include <stdbool.h>
-
-
 
 int		main( void );
 int		test_checksum_NMEA( bool verbose );

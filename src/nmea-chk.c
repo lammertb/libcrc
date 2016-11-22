@@ -3,14 +3,7 @@
  * File:    src/nmea-chk.c
  * Author:  Lammert Bies
  *
- *
- *
  * This file is licensed under the MIT License as stated below
- *
- *
- *
- * License
- * -------
  *
  * Copyright (c) 2008-2016 Lammert Bies
  *
@@ -32,22 +25,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- *
- *
  * Description
  * -----------
- *
  * The source file src/nmea-chk.c contains routines to calculate the checksum
  * in NMEA messages.
  */
 
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "checksum.h"
-
-
 
 /*
  * unsigned char *checksum_NMEA( const unsigned char *input_str, unsigned char *result );

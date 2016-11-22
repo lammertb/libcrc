@@ -3,14 +3,7 @@
  * File:    src/crc32.c
  * Author:  Lammert Bies
  *
- *
- *
  * This file is licensed under the MIT License as stated below
- *
- *
- *
- * License
- * -------
  *
  * Copyright (c) 1999-2016 Lammert Bies
  *
@@ -32,31 +25,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- *
- *
  * Description
  * -----------
- *
  * The source file src/crc32.c contains the routines which are needed to
  * calculate a 32 bit CRC value of a sequence of bytes.
  */
-
-
 
 #include <stdbool.h>
 #include <stdlib.h>
 #include "checksum.h"
 
-
+static void             init_crc32_tab( void );
 
 static bool             crc_tab32_init          = false;
 static uint32_t		crc_tab32[256];
-
-
-
-static void             init_crc32_tab( void );
-
-
 
 /*
  * uint32_t crc_32( const unsigned char *input_str, size_t num_bytes );
@@ -94,8 +76,6 @@ uint32_t crc_32( const unsigned char *input_str, size_t num_bytes ) {
 
 }  /* crc_32 */
 
-
-
 /*
  * uint32_t update_crc_32( uint32_t crc, unsigned char c );
  *
@@ -118,8 +98,6 @@ uint32_t update_crc_32( uint32_t crc, unsigned char c ) {
 	return crc & 0xffffffffL;;
 
 }  /* update_crc_32 */
-
-
 
 /*
  * static void init_crc32_tab( void );

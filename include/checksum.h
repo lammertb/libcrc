@@ -3,14 +3,7 @@
  * File:    include/checksum.h
  * Author:  Lammert Bies
  *
- *
- *
  * This file is licensed under the MIT License as stated below
- *
- *
- *
- * License
- * -------
  *
  * Copyright (c) 1999-2016 Lammert Bies
  *
@@ -32,23 +25,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- *
- *
  * Description
  * -----------
- *
  * The headerfile include/checksum.h contains the definitions and prototypes
  * for routines that can be used to calculate several kinds of checksums.
  */
-
-
 
 #ifndef DEF_LIBCRC_CHECKSUM_H
 #define DEF_LIBCRC_CHECKSUM_H
 
 #include <stdint.h>
-
-
 
 /*
  * #define CRC_POLY_xxxx
@@ -63,8 +49,6 @@
 #define		CRC_POLY_DNP		0xA6BC
 #define		CRC_POLY_KERMIT		0x8408
 #define		CRC_POLY_SICK		0x8005
-
-
 
 /*
  * #define CRC_START_xxxx
@@ -83,8 +67,6 @@
 #define		CRC_START_SICK		0x0000
 #define		CRC_START_DNP		0x0000
 #define		CRC_START_32		0xFFFFFFFFL
-
-
 
 /*
  * Prototype list of global functions

@@ -3,14 +3,7 @@
  * File:    src/crcsick.c
  * Author:  Lammert Bies
  *
- *
- *
  * This file is licensed under the MIT License as stated below
- *
- *
- *
- * License
- * -------
  *
  * Copyright (c) 2007-2016 Lammert Bies
  *
@@ -32,22 +25,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- *
- *
  * Description
  * -----------
- *
  * The source file src/crcsick.c contains routines that help in calculating the
  * CRC value that is used as dataprotection measure in communications with Sick
  * electronic devices.
  */
 
-
-
 #include <stdlib.h>
 #include "checksum.h"
-
-
 
 /*
  * uint16_t crc_sick( const unsigned char *input_str, size_t num_bytes );
@@ -90,8 +76,6 @@ uint16_t crc_sick( const unsigned char *input_str, size_t num_bytes ) {
 	return crc;
 
 }  /* crc_sick */
-
-
 
 /*
  * uint16_t update_crc_sick( uint16_t crc, unsigned char c, unsigned char prev_byte );

@@ -3,14 +3,7 @@
  * File:    test/testall.c
  * Author:  Lammert Bies
  *
- *
- *
  * This file is licensed under the MIT License as stated below
- *
- *
- *
- * License
- * -------
  *
  * Copyright (c) 2008-2016 Lammert Bies
  *
@@ -32,23 +25,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- *
- *
  * Description
  * -----------
- *
  * The source file test/testall.c contains routines to check the proper
  * functionality of routines in the libcrc library on the current platform.
  */
 
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "testall.h"
-
-
-
 
 /*
  * int main( void );
@@ -76,4 +61,4 @@ int main( void ) {
 
 	return problems;
 
-}  /* main ( libcrc test ) */
+}  /* main (libcrc test) */

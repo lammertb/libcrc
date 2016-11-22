@@ -3,14 +3,7 @@
  * File:    src/crcdnp.c
  * Author:  Lammert Bies
  *
- *
- *
  * This file is licensed under the MIT License as stated below
- *
- *
- *
- * License
- * -------
  *
  * Copyright (c) 2005-2016 Lammert Bies
  *
@@ -32,11 +25,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- *
- *
  * Description
  * -----------
- *
  * The source file src/crcdnp.c contains routines which are used to calculate
  * the CRC value in DNP messages.
  */
@@ -47,16 +37,10 @@
 #include <stdlib.h>
 #include "checksum.h"
 
-
+static void             init_crcdnp_tab( void );
 
 static bool             crc_tabdnp_init         = false;
 static uint16_t         crc_tabdnp[256];
-
-
-
-static void             init_crcdnp_tab( void );
-
-
 
 /*
  * uint16_t crc_dnp( const unsigned char* input_str, size_t num_bytes );
@@ -98,8 +82,6 @@ uint16_t crc_dnp( const unsigned char *input_str, size_t num_bytes ) {
 
 }  /* crc_dnp */
 
-
-
 /*
  * uint16_t update_crc_dnp( uint16_t crc, unsigned char c );
  *
@@ -122,8 +104,6 @@ uint16_t update_crc_dnp( uint16_t crc, unsigned char c ) {
 	return crc;
 
 }  /* update_crc_dnp */
-
-
 
 /*
  * static void init_crcdnp_tab( void );

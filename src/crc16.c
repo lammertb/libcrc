@@ -3,14 +3,7 @@
  * File:    src/crc16.c
  * Author:  Lammert Bies
  *
- *
- *
  * This file is licensed under the MIT License as stated below
- *
- *
- *
- * License
- * -------
  *
  * Copyright (c) 1999-2016 Lammert Bies
  *
@@ -32,31 +25,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- *
- *
  * Description
  * -----------
- *
  * The source file src/crc16.c contains routines which calculate the common
  * CRC16 cyclic redundancy check values for an incomming byte string.
  */
-
-
 
 #include <stdbool.h>
 #include <stdlib.h>
 #include "checksum.h"
 
-
+static void             init_crc16_tab( void );
 
 static bool             crc_tab16_init          = false;
 static uint16_t         crc_tab16[256];
-
-
-
-static void             init_crc16_tab( void );
-
-
 
 /*
  * uint16_t crc_16( const unsigned char *input_str, size_t num_bytes );
@@ -93,8 +75,6 @@ uint16_t crc_16( const unsigned char *input_str, size_t num_bytes ) {
 
 }  /* crc_16 */
 
-
-
 /*
  * uint16_t crc_modbus( const unsigned char *input_str, size_t num_bytes );
  *
@@ -129,8 +109,6 @@ uint16_t crc_modbus( const unsigned char *input_str, size_t num_bytes ) {
 
 }  /* crc_modbus */
 
-
-
 /*
  * uint16_t update_crc_16( uint16_t crc, unsigned char c );
  *
@@ -153,8 +131,6 @@ uint16_t update_crc_16( uint16_t crc, unsigned char c ) {
 	return crc;
 
 }  /* update_crc_16 */
-
-
 
 /*
  * static void init_crc16_tab( void );

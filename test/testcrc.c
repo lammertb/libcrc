@@ -3,15 +3,10 @@
  * File:    test/testcrc.c
  * Author:  Lammert Bies
  *
- *
- *
  * This file is licensed under the MIT License as stated below
- *
- *
  *
  * License
  * -------
- *
  * Copyright (c) 2008-2016 Lammert Bies
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,24 +27,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- *
- *
  * Description
  * -----------
- *
  * The source file test/testcrc.c contains routines which test if the
  * implementation of the CRC routines from the libcrc library went without
  * problems.
  */
 
-
-
 #include <inttypes.h>
 #include <stdio.h>
 #include <string.h>
 #include "testall.h"
-#include "../include/checksum.h"
 
+#include "../include/checksum.h"
 
 						/************************************************/
 struct chk_tp {					/*						*/
@@ -67,7 +57,6 @@ struct chk_tp {					/*						*/
 };						/*						*/
 						/************************************************/
 
-
 static struct chk_tp checks[] = {
 	{ "123456789",    0xA2, 0xBB3D, 0xCBF43926, 0x82EA, 0x4B37, 0x56A6, 0x31C3, 0xE5CC, 0x29B1, 0x8921 },
 	{ "Lammert Bies", 0xA5, 0xB638, 0x43C04CA6, 0x4583, 0xB45C, 0x1108, 0xCEC8, 0x67A2, 0x4A31, 0xF80D },
@@ -75,8 +64,6 @@ static struct chk_tp checks[] = {
 	{ " ",            0x86, 0xD801, 0xE96CCF45, 0x50D6, 0x98BE, 0x2000, 0x2462, 0xE8FE, 0xC592, 0x0221 },
 	{ NULL,           0,    0,      0,          0,      0,      0,      0,      0,      0,      0      }
 };
-
-
 
 /*
  * int test_crc( bool verbose );

@@ -3,14 +3,7 @@
 # File:    Makefile
 # Author:  Lammert Bies
 #
-#
-#
 # This file is licensed under the MIT License as stated below
-#
-#
-#
-# License
-# -------
 #
 # Copyright (c) 1999-2016 Lammert Bies
 #
@@ -32,11 +25,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 #
-#
-#
 # Description
 # -----------
-#
 # This Makefile is used to build the libcrc library. The only action you should
 # normally have to do is to run the make program from the command line,
 # independent on the Operating System you are working on.
@@ -45,11 +35,8 @@
 # was a deliberate decision due to the absense of these tools on some systems,
 # in particular in Windows environments.
 #
-#
-#
 # Dependencies
 # ------------
-#
 # This Makefile is known to be functional with GNU Make. Other make utilities
 # may work or may have problems. GNU Make is available both in source code
 # and precompiled binaries for a large number of environments and therefore
@@ -60,19 +47,14 @@
 # should have been installed already together with your compiler there are no
 # other known dependencies.
 #
-#
-#
 # Library Type
 # ------------
-#
 # The generated library is a library useable for static linking in this
 # source directory structure. The decision for a static linkable library
 # was deliberate because of the relatively small size of the library and the
 # routines and to avoid version and dependency issues when distributing the
 # end application to different environments.
 #
-
-
 
 ifeq ($(OS),Windows_NT)
 
@@ -127,8 +109,6 @@ CFLAGS = -Wall -Wextra -Wstrict-prototypes -Wshadow -Wpointer-arith \
 
 endif
 
-
-
 #
 # Default compile commands for the source files
 #
@@ -142,8 +122,6 @@ ${TSTDIR}${OBJDIR}%${OBJEXT} : ${TSTDIR}%.c
 ${EXADIR}${OBJDIR}%${OBJEXT} : ${EXADIR}%.c
 	${CC} -c ${CFLAGS} ${OFLAG}$@ $<
 
-
-
 #
 # The make file is used to compile the library, a test program to verify the
 # functionality of the checksum algorithms after compilation and example
@@ -154,8 +132,6 @@ all:							\
 	${LIBDIR}libcrc${LIBEXT}			\
 	testall${EXEEXT}				\
 	tstcrc${EXEEXT}
-
-
 
 #
 # This target cleans up all files created in the compilation phase.
@@ -168,8 +144,6 @@ clean:
 	${RM} ${LIBDIR}libcrc${LIBEXT}
 	${RM} testall${EXEEXT}
 	${RM} tstcrc${EXEEXT}
-
-
 
 #
 # The testall program can be run after compilation to verify the checksum
@@ -203,8 +177,6 @@ tstcrc${EXEEXT} :					\
 		${LIBDIR}libcrc${LIBEXT}
 	${STRIP} tstcrc${EXEEXT}
 
-
-
 #
 # libcrc is the library which can be linked with other applications. The
 # extension of the library depends on the operating system used.
@@ -230,8 +202,6 @@ ${LIBDIR}libcrc${LIBEXT} :			\
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crcsick${OBJEXT}
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}nmea-chk${OBJEXT}
 		${RANLIB}    ${LIBDIR}libcrc${LIBEXT}
-
-
 
 #
 # Individual source files with their header file dependencies

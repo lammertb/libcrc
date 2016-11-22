@@ -3,14 +3,7 @@
  * File:    src/crcccitt.c
  * Author:  Lammert Bies
  *
- *
- *
  * This file is licensed under the MIT License as stated below
- *
- *
- *
- * License
- * -------
  *
  * Copyright (c) 1999-2016 Lammert Bies
  *
@@ -32,32 +25,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- *
- *
  * Description
  * -----------
- *
  * The module src/crcccitt.c contains routines which are used to calculate the
  * CCITT CRC values of a string of bytes.
  */
-
-
 
 #include <stdbool.h>
 #include <stdlib.h>
 #include "checksum.h"
 
-
-
-static bool             crc_tabccitt_init       = false;
-static uint16_t         crc_tabccitt[256];
-
-
-
 static uint16_t		crc_ccitt_generic( const unsigned char *input_str, size_t num_bytes, uint16_t start_value );
 static void             init_crcccitt_tab( void );
 
-
+static bool             crc_tabccitt_init       = false;
+static uint16_t         crc_tabccitt[256];
 
 /*
  * uint16_t crc_xmodem( const unsigned char *input_str, size_t num_bytes );
@@ -71,8 +53,6 @@ uint16_t crc_xmodem( const unsigned char *input_str, size_t num_bytes ) {
 	return crc_ccitt_generic( input_str, num_bytes, CRC_START_XMODEM );
 
 }  /* crc_xmodem */
-
-
 
 /*
  * uint16_t crc_ccitt_1d0f( const unsigned char *input_str, size_t num_bytes );
@@ -88,8 +68,6 @@ uint16_t crc_ccitt_1d0f( const unsigned char *input_str, size_t num_bytes ) {
 
 }  /* crc_ccitt_1d0f */
 
-
-
 /*
  * uint16_t crc_ccitt_ffff( const unsigned char *input_str, size_t num_bytes );
  *
@@ -103,8 +81,6 @@ uint16_t crc_ccitt_ffff( const unsigned char *input_str, size_t num_bytes ) {
 	return crc_ccitt_generic( input_str, num_bytes, CRC_START_CCITT_FFFF );
 
 }  /* crc_ccitt_ffff */
-
-
 
 /*
  * static uint16_t crc_ccitt_generic( const unsigned char *input_str, size_t num_bytes, uint16_t start_value );
@@ -140,8 +116,6 @@ static uint16_t crc_ccitt_generic( const unsigned char *input_str, size_t num_by
 
 }  /* crc_ccitt_generic */
 
-
-
 /*
  * uint16_t update_crc_ccitt( uint16_t crc, unsigned char c );
  *
@@ -164,8 +138,6 @@ uint16_t update_crc_ccitt( uint16_t crc, unsigned char c ) {
 	return crc;
 
 }  /* update_crc_ccitt */
-
-
 
 /*
  * static void init_crcccitt_tab( void );

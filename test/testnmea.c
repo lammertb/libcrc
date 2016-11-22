@@ -3,14 +3,7 @@
  * File:    test/testnmea.c
  * Author:  Lammert Bies
  *
- *
- *
  * This file is licensed under the MIT License as stated below
- *
- *
- *
- * License
- * -------
  *
  * Copyright (c) 2008-2016 Lammert Bies
  *
@@ -32,23 +25,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- *
- *
  * Description
  * -----------
- *
  * The source file test/testnmea.c contains routines to test the functionality
  * of the NMEA routines in the libcrc library after compilation on a specific
  * platform.
  */
 
-
-
 #include <stdio.h>
 #include <string.h>
 #include "testall.h"
-#include "../include/checksum.h"
 
+#include "../include/checksum.h"
 
 
 						/************************************************/
@@ -57,8 +45,6 @@ struct chk_tp {					/*						*/
 	const char *	output;			/* Expected checksum output			*/
 };						/*						*/
 						/************************************************/
-
-
 
 static struct chk_tp checks[] = {
 	{ "$GPRMC,162254.00,A,3723.02837,N,12159.39853,W,0.820,188.36,110706,,,A*74",		"74" },
@@ -209,8 +195,6 @@ static struct chk_tp checks[] = {
 	{ "$GPZDA,162254.00,11,07,2006,00,00*",							"63" },
 	{ NULL, NULL }
 };
-
-
 
 /*
  * int test_checksum_NMEA( bool verbose );

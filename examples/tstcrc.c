@@ -34,8 +34,6 @@
  * program has started.
  */
 
-
-
 #include <inttypes.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -45,11 +43,15 @@
 
 #include "../include/checksum.h"
 
-
-
 #define MAX_STRING_SIZE	2048
 
-
+/*
+ * int main( int argc, char *argv[] );
+ *
+ * The function main() is the entry point of the example program which
+ * calculates several CRC values from the contents of files, or data from
+ * stdin.
+ */
 
 int main( int argc, char *argv[] ) {
 
@@ -125,8 +127,6 @@ int main( int argc, char *argv[] ) {
 		*(dest+1) = '\x80';
 	}
 
-
-
 	a = 1;
 
 	do {
@@ -165,8 +165,6 @@ int main( int argc, char *argv[] ) {
 			}
 		}
 
-
-
 		else if ( do_hex ) {
 
 			prev_byte = 0;
@@ -193,8 +191,6 @@ int main( int argc, char *argv[] ) {
 
 			input_string[0] = 0;
 		}
-
-
 
 		else {
 
@@ -228,8 +224,6 @@ int main( int argc, char *argv[] ) {
 
 			else printf( "%s : cannot open file\n", argv[a] );
 		}
-
-
 
 		crc_32_val        ^= 0xffffffffL;
 

@@ -3,14 +3,7 @@
  * File:    src/crckrmit.c
  * Author:  Lammert Bies
  *
- *
- *
  * This file is licensed under the MIT License as stated below
- *
- *
- *
- * License
- * -------
  *
  * Copyright (c) 1999-2016 Lammert Bies
  *
@@ -32,31 +25,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- *
- *
  * Description
  * -----------
- *
  * The source file src/crckrmit.c contains routines which calculate the CRC
  * Kermit cyclic redundancy check value for an incomming byte string.
  */
-
-
 
 #include <stdbool.h>
 #include <stdlib.h>
 #include "checksum.h"
 
-
+static void		init_crc_tab( void );
 
 static bool		crc_tab_init		= false;
 static uint16_t		crc_tab[256];
-
-
-
-static void		init_crc_tab( void );
-
-
 
 /*
  * uint16_t crc_kermit( const unsigned char *input_str, size_t num_bytes );
@@ -98,8 +80,6 @@ uint16_t crc_kermit( const unsigned char *input_str, size_t num_bytes ) {
 
 }  /* crc_kermit */
 
-
-
 /*
  * uint16_t update_crc_kermit( uint16_t crc, unsigned char c );
  *
@@ -122,8 +102,6 @@ uint16_t update_crc_kermit( uint16_t crc, unsigned char c ) {
 	return crc;
 
 }  /* update_crc_kermit */
-
-
 
 /*
  * static void init_crc_tab( void );

@@ -3,14 +3,7 @@
  * File:    src/crc8.c
  * Author:  Lammert Bies
  *
- *
- *
  * This file is licensed under the MIT License as stated below
- *
- *
- *
- * License
- * -------
  *
  * Copyright (c) 1999-2016 Lammert Bies
  *
@@ -32,22 +25,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- *
- *
  * Description
  * -----------
- *
  * The source file src/crc8.c contains routines for the calculation of 8 bit
  * CRC values according to the calculation rules used in the SHT1x and SHT7x
  * series of temperature and humidity sensors.
  */
 
-
-
 #include <stdlib.h>
 #include "checksum.h"
-
-
 
 /*
  * static uint8_t sht75_crc_table[];
@@ -77,8 +63,6 @@ static uint8_t sht75_crc_table[] = {
 	130, 179, 224, 209, 70,  119, 36,  21,  59,  10,  89,  104, 255, 206, 157, 172
 };
 
-
-
 /*
  * uint8_t crc_8( const unsigned char *input_str, size_t num_bytes );
  *
@@ -104,8 +88,6 @@ uint8_t crc_8( const unsigned char *input_str, size_t num_bytes ) {
 	return crc;
 
 }  /* crc_8 */
-
-
 
 /*
  * uint8_t update_crc_8( unsigned char crc, unsigned char val );
