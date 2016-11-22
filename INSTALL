@@ -121,6 +121,9 @@ root directory of the library directory structure which you can call to check
 if the implementation is properly working on your hardware/software
 combination.
 
+You should note though that through the use of uint16_t and uint32_t types in
+the current version, very old compilers may fail to compile the newest sources.
+
 
 
 Result files
@@ -141,7 +144,7 @@ make all
 	creates both the library and the test program
 
 make clean
-	cleans up the object files, library file and testall executable.
+	cleans up the object files, library file and testall executable
 
 
 Lammert Bies
