@@ -3,8 +3,8 @@
 Libcrc is a multi platform CRC library which has been under development since
 1999. The original version of the source code has been available on [www.lammertbies.nl](https://www.lammertbies.nl/)
 since that time. Recently that code was merged with previously unpublished
-developments and that library is now available at [Github](https://github.com/lammertb/libcrc/)
-An online version of the CRC calculation routines is also availabie at [www.lammertbies.nlr](https://www.lammertbies.nl/comm/info/crc-calculation.html)
+developments and that library is now available at [Github](https://github.com/lammertb/libcrc/).
+An online version of the CRC calculation routines is also available at [www.lammertbies.nl](https://www.lammertbies.nl/comm/info/crc-calculation.html).
 
 ## License
 
