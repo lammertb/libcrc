@@ -16,5 +16,5 @@ testall.exe
 testall
 tstcrc.exe
 tstcrc
-precalc.exe
-precalc
+bin/prc.exe
+bin/prc

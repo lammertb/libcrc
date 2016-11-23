@@ -58,6 +58,7 @@
 
 ifeq ($(OS),Windows_NT)
 
+BINDIR = bin\\
 GENDIR = precalc\\
 INCDIR = include\\
 LIBDIR = lib\\
@@ -85,6 +86,7 @@ CFLAGS = -Ox -Ot -MT -GT -volatile:iso -I${INCDIR} -nologo -J -sdl -Wall -WX \
 
 else
 
+BINDIR = bin/
 GENDIR = precalc/
 INCDIR = include/
 LIBDIR = lib/
@@ -151,7 +153,7 @@ clean:
 	${RM} ${TSTDIR}${OBJDIR}*${OBJEXT}
 	${RM} ${GENDIR}${OBJDIR}*${OBJEXT}
 	${RM} ${LIBDIR}libcrc${LIBEXT}
-	${RM} precalc${EXEEXT}
+	${RM} ${BINDIR}prc${EXEEXT}
 	${RM} testall${EXEEXT}
 	${RM} tstcrc${EXEEXT}
 
@@ -174,18 +176,18 @@ testall${EXEEXT} :					\
 	${STRIP} testall${EXEEXT}
 
 #
-# The precalc program is used during compilation to generate the lookup tables
+# The prc program is used during compilation to generate the lookup tables
 # for the CRC calculation routines.
 #
 
-precalc${EXEEXT} :					\
+${BINDIR}prc${EXEEXT} :					\
 		${GENDIR}${OBJDIR}precalc${OBJEXT}	\
 		${GENDIR}${OBJDIR}crc64_table${OBJEXT}	\
 		Makefile
-	${LINK}	${XFLAG}precalc${EXEEXT}		\
+	${LINK}	${XFLAG}${BINDIR}prc${EXEEXT}		\
 		${GENDIR}${OBJDIR}precalc${OBJEXT}	\
 		${GENDIR}${OBJDIR}crc64_table${OBJEXT}
-	${STRIP} precalc${EXEEXT}
+	${STRIP} ${BINDIR}prc${EXEEXT}
 
 #
 # The tstcrc program can be run to calculate the CRC values of manual input or
@@ -233,8 +235,8 @@ ${LIBDIR}libcrc${LIBEXT} :			\
 # Lookup table include file dependencies
 #
 
-${TABDIR}gentab64.inc			: precalc${EXEEXT}
-	precalc --crc64 ${TABDIR}gentab64.inc
+${TABDIR}gentab64.inc			: ${BINDIR}prc${EXEEXT}
+	${BINDIR}prc --crc64 ${TABDIR}gentab64.inc
 
 #
 # Individual source files with their header file dependencies
