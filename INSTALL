@@ -91,10 +91,10 @@ Studio project directories in their project, one for each Visual Studio version
 they support.
 
 A second point is that this library runs on many versions of *nix flavors and
-autoconf versions on older OS versions (Centos 5.x as an example) are not
-fully compatible with newer bleeding edge operating systems.
+autoconf versions on older but still supported OS versions (Centos 6.x as an
+example) are not fully compatible with newer bleeding edge operating systems.
 
-For that reason de toolchain only uses the make utility. The Makefile has been
+For that reason the toolchain only uses the make utility. The Makefile has been
 specifically designed for GNU make, although other make implementations may
 work. If you encounter make problems with your make implementation, the best
 bet is to download a source or precompiled binary version of GNU make for your

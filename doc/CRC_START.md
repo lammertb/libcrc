@@ -2,18 +2,18 @@
 
 ### CRC start values
 
-| Name | Value | Description |
-| :--- | ---: | :--- |
-|**`CRC_START_8`**|`00`||
-|**`CRC_START_16`**|`0000`||
-|**`CRC_START_MODBUS`**|`FFFF`||
-|**`CRC_START_XMODEM`**|`0000`||
-|**`CRC_START_CCITT_1D0F`**|`1D0F`||
-|**`CRC_START_CCITT_FFFF`**||`FFFF`||
-|**`CRC_START_KERMIT`**|`0000`||
-|**`CRC_START_SICK`**|`0000`||
-|**`CRC_START_DNP`**|`0000`||
-|**`CRC_START_32`**|`FFFFFFFF`||
+| Name | Value (hex) |
+| :--- | ---: |
+|**`CRC_START_8`**|`00`|
+|**`CRC_START_16`**|`0000`|
+|**`CRC_START_MODBUS`**|`FFFF`|
+|**`CRC_START_XMODEM`**|`0000`|
+|**`CRC_START_CCITT_1D0F`**|`1D0F`|
+|**`CRC_START_CCITT_FFFF`**|`FFFF`|
+|**`CRC_START_KERMIT`**|`0000`|
+|**`CRC_START_SICK`**|`0000`|
+|**`CRC_START_DNP`**|`0000`|
+|**`CRC_START_32`**|`FFFFFFFF`|
 
 ### Description
 

@@ -46,7 +46,7 @@ static uint16_t         crc_tab16[256];
  * The function crc_16() calculates the 16 bits CRC16 in one pass for a byte
  * string of which the beginning has been passed to the function. The number of
  * bytes to check is also a parameter. The number of the bytes in the string is
- * limited by the constant __INT_MAX__
+ * limited by the constant SIZE_MAX.
  */
 
 uint16_t crc_16( const unsigned char *input_str, size_t num_bytes ) {
