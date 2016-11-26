@@ -27,6 +27,6 @@ with a different initialization parameter.
 
 ### See Also
 
-* [`crc_ccitt_1d0f();`](update_crc_1d0f.md)
-* [`crc_ccitt_ffff();`](update_crc_ffff.md)
+* [`crc_ccitt_1d0f();`](crc_ccitt_1d0f.md)
+* [`crc_ccitt_ffff();`](crc_ccitt_ffff.md)
 * [`update_crc_ccitt();`](update_crc_ccitt.md)
