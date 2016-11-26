@@ -24,4 +24,4 @@ as a return value by the function. The size of the buffer is limited to `SIZE_MA
 
 ### See Also
 
-* [`update_dnp();`](update_dnp.md)
+* [`update_crc_dnp();`](update_crc_dnp.md)
