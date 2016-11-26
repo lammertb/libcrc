@@ -26,4 +26,4 @@ and can be compiled with any modern C compiler. The API to the library is descri
 * [`update_crc_ccitt( crc, c );`](doc/update_crc_ccitt.md)
 * [`update_crc_dnp( crc, c );`](doc/update_crc_dnp.md)
 * [`update_crc_kermit( crc, c );`](doc/update_crc_kermit.md)
-* [`update_crc_sick( crc, c, prev_byte );`](doc/update_src_sick.md)
+* [`update_crc_sick( crc, c, prev_byte );`](doc/update_crc_sick.md)
