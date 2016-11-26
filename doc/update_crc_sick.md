@@ -35,7 +35,7 @@ Please also note that when all processing is completed, that the low and high or
 the CRC value must be swapped to get the final CRC value.
 
 If you need an example to implement `update_crc_sick()` properly in your code, you can look at
-the implementation of `crc_sick()` in the source file [`crc_sick.c`](../src/crc_sick.c) as
+the implementation of `crc_sick()` in the source file [`crc_sick.c`](../src/crcsick.c) as
 this function contains the full algorithm including initialization and byte swap.
 
 ### See Also
