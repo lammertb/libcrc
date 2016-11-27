@@ -2,12 +2,14 @@
 
 ### `crc_8( input_str, num_bytes );`
 
+### Parameters
+
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
 |**`input_str`**|`const unsigned char *`|The input byte buffer for which the CRC must be calculated|
 |**`num_bytes`**|`size_t`|The number of characters in the input buffer|
 
-### Returns
+### Return Value
 
 | Type | Description |
 | :--- | :--- |

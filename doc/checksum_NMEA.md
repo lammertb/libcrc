@@ -2,12 +2,14 @@
 
 ### `checksum_NMEA( input_str, result );`
 
+### Parameters
+
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
 |**`input_str`**|`const unsigned char *`|The NUL terminated input string for which the NMEA checksum must be calculated|
 |**`result`**|`unsigned char *`|Storage buffer to the calculated NMEA checksum|
 
-### Returns
+### Return Value
 
 | Type | Description |
 | :--- | :--- |

@@ -10,7 +10,7 @@
 |**`c`**|`unsigned char`|The next byte from the byte stream to be used in the CRC calculation|
 |**`prev_byte`**|`unsigned char`|The previous byte from the byte stream|
 
-### Returns
+### Return Value
 
 | Type | Description |
 | :--- | :--- |

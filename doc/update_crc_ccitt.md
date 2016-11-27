@@ -9,15 +9,13 @@
 |**`crc`**|`uint16_t`|The CRC value calculated from the byte stream upto but not including the current byte|
 |**`c`**|`unsigned char`|The next byte from the byte stream to be used in the CRC calculation|
 
-### Returns
+### Return Value
 
 | Type | Description |
 | :--- | :--- |
 |**`uint16_t`**|The new CRC value of the byte stream including the current byte|
 
 ### Description
-
-### See Also
 
 The function `update_crc_ccitt()` can be used to calculate the CRC value in a stream of bytes where
 it is not possible to first buffer the stream completely to calculate the CRC when all data

@@ -9,7 +9,7 @@
 |**`crc`**|`uint32_t`|The CRC value calculated from the byte stream upto but not including the current byte|
 |**`c`**|`unsigned char`|The next byte from the byte stream to be used in the CRC calculation|
 
-### Returns
+### Return Value
 
 | Type | Description |
 | :--- | :--- |
