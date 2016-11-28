@@ -46,7 +46,8 @@ Downloading a pre-packaged zip or tar file with sources
 -------------------------------------------------------
 
 Some snapshots of the libcrc library source files will be available as packaged
-compressed files in zip and tar format.
+compressed files in zip and tar format. The latest release in zip and tar
+format can be found at https://github.com/lammertb/libcrc/releases/latest
 
 
 Downloading a pre-compiled static library for your OS
