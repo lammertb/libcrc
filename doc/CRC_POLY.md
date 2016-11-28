@@ -18,6 +18,6 @@ in the CRC calculation as a bit pattern where each bit defines if a certain orde
 the algorithms it is enough to know which bit pattern to use. These are defined in the `CRC_POLY_...` constants. For
 more background you can visit the [CRC calculation page at www.lammertbies.nl](https://www.lammertbies.nl/comm/info/crc-calculation.html).
 
-## See Also
+### See Also
 
 * [CRC start values](CRC_START.md)
