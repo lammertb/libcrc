@@ -29,4 +29,4 @@ to perform the Kermit CRC calculation.
 ### See Also
 
 * [`crc_kermit();`](crc_kermit.md)
-* [CRC start values](CRC_START.md)
+* [CRC start values](crc_start.md)

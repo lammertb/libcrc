@@ -30,4 +30,4 @@ humidity sensors.
 ### See Also
 
 * [`crc_8();`](crc_8.md)
-* [CRC start values](CRC_START.md)
+* [CRC start values](crc_start.md)

@@ -33,4 +33,4 @@ other common CCITT implementations.
 * [`crc_ccitt_1d0f();`](crc_ccitt_1d0f.md)
 * [`crc_ccitt_ffff();`](crc_ccitt_ffff.md)
 * [`crc_xmodem();`](crc_xmodem.md)
-* [CRC start values](CRC_START.md)
+* [CRC start values](crc_start.md)

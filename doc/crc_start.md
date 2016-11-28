@@ -22,4 +22,4 @@ must first be initialized. The value to use depends on the CRC algorithm.
 
 ### See Also
 
-* [CRC polynomials](CRC_POLY.md)
+* [CRC polynomials](crc_poly.md)

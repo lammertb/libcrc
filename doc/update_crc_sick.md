@@ -41,4 +41,4 @@ this function contains the full algorithm including initialization and byte swap
 ### See Also
 
 * [`crc_sick();`](crc_sick.md)
-* [CRC start values](CRC_START.md)
+* [CRC start values](crc_start.md)

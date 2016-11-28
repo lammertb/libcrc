@@ -5,12 +5,12 @@ and can be compiled with any modern C compiler. The API to the library is descri
 
 ## Constants
 
-* [CRC polynomials](doc/CRC_POLY.md)
-* [CRC start values](doc/CRC_START.md)
+* [CRC start values](doc/crc_start.md)
+* [CRC polynomials](doc/crc_poly.md)
 
 ## Functions
 
-* [`checksum_NMEA( input_str, result );`](doc/checksum_NMEA.md)
+* [`checksum_NMEA( input_str, result );`](doc/checksum_nmea.md)
 * [`crc_8( input_str, num_bytes );`](doc/crc_8.md)
 * [`crc_16( input_str, num_bytes );`](doc/crc_16.md)
 * [`crc_32( input_str, num_bytes );`](doc/crc_32.md)
