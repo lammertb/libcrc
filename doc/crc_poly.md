@@ -13,10 +13,7 @@
 
 ### Description
 
-The mathematical background of CRC is setup with polynomial divisions of a certain order. Each polynomial is represented
-in the CRC calculation as a bit pattern where each bit defines if a certain order polynomial factor is one or zero. For
-the algorithms it is enough to know which bit pattern to use. These are defined in the `CRC_POLY_...` constants. For
-more background you can visit the [CRC calculation page at www.lammertbies.nl](https://www.lammertbies.nl/comm/info/crc-calculation.html).
+The mathematical background of CRC is setup with polynomial divisions of a certain order. Each polynomial is represented in the CRC calculation as a bit pattern where each bit defines if a certain order polynomial factor is one or zero. For the algorithms it is enough to know which bit pattern to use. These are defined in the `CRC_POLY_...` constants. For more background you can visit the [CRC calculation page at www.lammertbies.nl](https://www.lammertbies.nl/comm/info/crc-calculation.html).
 
 ### See Also
 

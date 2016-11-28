@@ -17,10 +17,7 @@
 
 ### Description
 
-The function `crc_dnp()` calculates a 16 bit CRC value of an input byte buffer based on the
-CRC calculation algorithm used in the DNP protocol.
-The buffer length is provided as a parameter and the resulting CRC is returned
-as a return value by the function. The size of the buffer is limited to `SIZE_MAX`.
+The function `crc_dnp()` calculates a 16 bit CRC value of an input byte buffer based on the CRC calculation algorithm used in the DNP protocol.  The buffer length is provided as a parameter and the resulting CRC is returned as a return value by the function. The size of the buffer is limited to `SIZE_MAX`.
 
 ### See Also
 

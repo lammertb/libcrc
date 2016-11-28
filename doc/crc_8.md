@@ -17,10 +17,7 @@
 
 ### Description
 
-The function `crc_8()` calculates a 8 bit CRC value of an input byte buffer based on the CRC algorithm as
-it is used in Sensirion SHTxx temperature and humidity sensors.
-The buffer length is provided as a parameter and the resulting CRC is returned
-as a return value by the function. The size of the buffer is limited to `SIZE_MAX`.
+The function `crc_8()` calculates a 8 bit CRC value of an input byte buffer based on the CRC algorithm as it is used in Sensirion SHTxx temperature and humidity sensors.  The buffer length is provided as a parameter and the resulting CRC is returned as a return value by the function. The size of the buffer is limited to `SIZE_MAX`.
 
 ### See Also
 

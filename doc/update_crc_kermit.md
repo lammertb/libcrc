@@ -17,14 +17,9 @@
 
 ### Description
 
-The function `update_crc_kermit()` can be used to calculate the CRC value in a stream of bytes where
-it is not possible to first buffer the stream completely to calculate the CRC when all data
-is received. The parameters are the previous CRC value and the current byte which must be used
-to calculate the new CRC value.
+The function `update_crc_kermit()` can be used to calculate the CRC value in a stream of bytes where it is not possible to first buffer the stream completely to calculate the CRC when all data is received. The parameters are the previous CRC value and the current byte which must be used to calculate the new CRC value.
 
-In order for this function to work properly, the CRC value must be initialized before the first
-call to `update_crc_kermit()`. The most common initialization value is `CRC_START_KERMIT`
-to perform the Kermit CRC calculation.
+In order for this function to work properly, the CRC value must be initialized before the first call to `update_crc_kermit()`. The most common initialization value is `CRC_START_KERMIT` to perform the Kermit CRC calculation.
 
 ### See Also
 

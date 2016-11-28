@@ -17,8 +17,7 @@
 
 ### Description
 
-Before the calculation of the CRC value of a byte blob can start, the value of the CRC
-must first be initialized. The value to use depends on the CRC algorithm.
+Before the calculation of the CRC value of a byte blob can start, the value of the CRC must first be initialized. The value to use depends on the CRC algorithm.
 
 ### See Also
 

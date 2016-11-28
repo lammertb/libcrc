@@ -17,13 +17,9 @@
 
 ### Description
 
-The function `crc_sick()` calculates a 16 bit CRC value of an input byte buffer based on the
-CRC calculation algorithm used by Sensor manufacturer Sick in some of their sensors.
-The buffer length is provided as a parameter and the resulting CRC is returned
-as a return value by the function. The size of the buffer is limited to `SIZE_MAX`.
+The function `crc_sick()` calculates a 16 bit CRC value of an input byte buffer based on the CRC calculation algorithm used by Sensor manufacturer Sick in some of their sensors.  The buffer length is provided as a parameter and the resulting CRC is returned as a return value by the function. The size of the buffer is limited to `SIZE_MAX`.
 
-The CRC calculation used by Sick differs from generic CRC calculation algorithms in that
-every input byte is passed twice through the algorithm.
+The CRC calculation used by Sick differs from generic CRC calculation algorithms in that every input byte is passed twice through the algorithm.
 
 ### See Also
 
