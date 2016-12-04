@@ -14,6 +14,7 @@
 |**`CRC_START_SICK`**|`0000`|
 |**`CRC_START_DNP`**|`0000`|
 |**`CRC_START_32`**|`FFFFFFFF`|
+|**`CRC_START_64_ECMA`**|`0000000000000000`|
 
 ### Description
 

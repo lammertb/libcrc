@@ -114,7 +114,7 @@ static void init_crc64_tab( void ) {
 
 		for (j=0; j<8; j++) {
 
-			if ( ( crc ^ c ) & 0x8000000000000000ull ) crc = ( crc << 1 ) ^ CRC_POLY_64_ECMA;
+			if ( ( crc ^ c ) & 0x8000000000000000ull ) crc = ( crc << 1 ) ^ CRC_POLY_64;
 			else                                       crc =   crc << 1;
 
 			c = c << 1;

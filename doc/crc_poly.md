@@ -6,6 +6,7 @@
 | :--- | ---: |
 |**`CRC_POLY_16`**|`A001`|
 |**`CRC_POLY_32`**|`EDB88320`|
+|**`CRC_POLY_64`**|`42F0E1EBA9EA3693`|
 |**`CRC_POLY_CCITT`**|`1021`|
 |**`CRC_POLY_DNP`**|`A6BC`|
 |**`CRC_POLY_KERMIT`**|`8408`|

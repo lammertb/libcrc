@@ -23,5 +23,5 @@ In order for this function to work properly, the CRC value must be initialized b
 
 ### See Also
 
-* [`crc_32();`](crc_32.md)
+* [`crc_64();`](crc_64.md)
 * [CRC start values](crc_start.md)
