@@ -136,7 +136,7 @@ static int generate_table( const char *typename, const char *filename ) {
 
 	for (a=0; a<256; a++) {
 
-		fprintf( fp, "\t0x%016" PRIX64, crc_tab64_precalc[a] );
+		fprintf( fp, "\t0x%016" PRIX64 "ull", crc_tab64_precalc[a] );
 		if ( a < 255 ) fprintf( fp, ",\n" );
 		else           fprintf( fp, "\n" );
 	}
