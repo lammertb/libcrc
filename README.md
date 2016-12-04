@@ -20,7 +20,7 @@ useful in open and closed source products independent of their licensing scheme.
 It is safe to say that in general you should use the latest stable version of the library available
 from the [releases page](https://github.com/lammertb/libcrc/releases). In some circumstances it may be
 necessary to use an older version or to use the development version instead. The differences between
-these versions can be found in the [Changelog](changelog.md) document which is part of the distribution.
+these versions can be found in the [Changelog](CHANGELOG.md) document which is part of the distribution.
 
 Please note that the development version is a snapshot of the ongoing development of the library and that
 that version may not be stable and reliable enough for production environments.
