@@ -34,8 +34,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "checksum.h"
-
-uint64_t		crc_tab64_precalc[256];
+#include "precalc.h"
 
 /*
  * void init_crc64_tab( void );
@@ -66,7 +65,7 @@ void init_crc64_tab( void ) {
 			c = c << 1;
 		}
 
-		crc_tab64_precalc[i] = crc;
+		crc_tab_precalc[i] = crc;
 	}
 
 }  /* init_crc64_tab */

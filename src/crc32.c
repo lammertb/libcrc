@@ -35,10 +35,11 @@
 #include <stdlib.h>
 #include "checksum.h"
 
-static void             init_crc32_tab( void );
+/*
+ * Include the lookup table for the CRC 32 calculation
+ */
 
-static bool             crc_tab32_init          = false;
-static uint32_t		crc_tab32[256];
+#include "../tab/gentab32.inc"
 
 /*
  * uint32_t crc_32( const unsigned char *input_str, size_t num_bytes );
@@ -53,8 +54,6 @@ uint32_t crc_32( const unsigned char *input_str, size_t num_bytes ) {
 	uint32_t crc;
 	const unsigned char *ptr;
 	size_t a;
-
-	if ( ! crc_tab32_init ) init_crc32_tab();
 
 	crc = CRC_START_32;
 	ptr = input_str;
@@ -77,39 +76,6 @@ uint32_t crc_32( const unsigned char *input_str, size_t num_bytes ) {
 
 uint32_t update_crc_32( uint32_t crc, unsigned char c ) {
 
-	if ( ! crc_tab32_init ) init_crc32_tab();
-
 	return (crc >> 8) ^ crc_tab32[ (crc ^ (uint32_t) c) & 0x000000FFul ];
 
 }  /* update_crc_32 */
-
-/*
- * static void init_crc32_tab( void );
- *
- * For optimal speed, the CRC32 calculation uses a table with pre-calculated
- * bit patterns which are used in the XOR operations in the program. This table
- * is generated once, the first time the CRC update routine is called.
- */
-
-static void init_crc32_tab( void ) {
-
-	uint32_t i;
-	uint32_t j;
-	uint32_t crc;
-
-	for (i=0; i<256; i++) {
-
-		crc = i;
-
-		for (j=0; j<8; j++) {
-
-			if ( crc & 0x00000001L ) crc = ( crc >> 1 ) ^ CRC_POLY_32;
-			else                     crc =   crc >> 1;
-		}
-
-		crc_tab32[i] = crc;
-	}
-
-	crc_tab32_init = true;
-
-}  /* init_crc32_tab */

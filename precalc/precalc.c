@@ -40,9 +40,20 @@
 #include <string.h>
 #include "precalc.h"
 
-#define TYPE_CRC64		1
+#define TYPE_CRC32		1
+#define TYPE_CRC64		2
 
-static int generate_table( const char *typename, const char *filename );
+/*
+ * Functions in this source file with local scope
+ */
+
+static int	generate_table( const char *typename, const char *filename );
+
+/*
+ * Internal table to store the CRC lookup table
+ */
+
+uint64_t	crc_tab_precalc[256];
 
 /*
  * int main( int argc, char *argv[] );
@@ -86,6 +97,7 @@ static int generate_table( const char *typename, const char *filename ) {
 
 	int a;
 	int type;
+	int bits;
 	FILE *fp;
 	const char *tabname;
 
@@ -95,7 +107,8 @@ static int generate_table( const char *typename, const char *filename ) {
 		return 2;
 	}
 
-	if ( ! strcmp( typename, "--crc64" ) ) type = TYPE_CRC64;
+	if      ( ! strcmp( typename, "--crc64" ) ) type = TYPE_CRC64;
+	else if ( ! strcmp( typename, "--crc32" ) ) type = TYPE_CRC32;
 	else {
 
 		fprintf( stderr, "\nprecalc: Unknown table type \"%s\" passed\n\n", typename );
@@ -103,10 +116,12 @@ static int generate_table( const char *typename, const char *filename ) {
 	}
 
 	tabname = NULL;
+	bits    = 1;
 
 	switch ( type ) {
 
-		case TYPE_CRC64 : init_crc64_tab(); tabname = "crc_tab64"; break;
+		case TYPE_CRC32 : init_crc32_tab(); tabname = "crc_tab32"; bits = 32; break;
+		case TYPE_CRC64 : init_crc64_tab(); tabname = "crc_tab64"; bits = 64; break;
 	}
 
 #if defined(_MSC_VER)
@@ -132,11 +147,17 @@ static int generate_table( const char *typename, const char *filename ) {
 	fprintf( fp, " * library is recompiled. All manually added changes will be lost in that case.\n" );
 	fprintf( fp, " */\n\n" );
 
-	fprintf( fp, "const uint64_t %s[256] = {\n", tabname );
+	fprintf( fp, "const uint%d_t %s[256] = {\n", bits, tabname );
 
 	for (a=0; a<256; a++) {
 
-		fprintf( fp, "\t0x%016" PRIX64 "ull", crc_tab64_precalc[a] );
+		switch ( bits ) {
+
+			case  8 : fprintf( fp, "\t0x%02"  PRIX64 "u",   crc_tab_precalc[a] & 0x00000000000000FFull ); break;
+			case 16 : fprintf( fp, "\t0x%04"  PRIX64 "u",   crc_tab_precalc[a] & 0x000000000000FFFFull ); break;
+			case 32 : fprintf( fp, "\t0x%08"  PRIX64 "ul",  crc_tab_precalc[a] & 0x00000000FFFFFFFFull ); break;
+			case 64 : fprintf( fp, "\t0x%016" PRIX64 "ull", crc_tab_precalc[a]                         ); break;
+		}
 		if ( a < 255 ) fprintf( fp, ",\n" );
 		else           fprintf( fp, "\n" );
 	}

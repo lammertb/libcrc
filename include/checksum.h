@@ -101,6 +101,7 @@ uint16_t		update_crc_sick(    uint16_t crc, unsigned char c, unsigned char prev_
  * Global CRC lookup tables
  */
 
-extern const uint64_t	crc64_tab[];
+extern const uint32_t	crc_tab32[];
+extern const uint64_t	crc_tab64[];
 
 #endif  // DEF_LIBCRC_CHECKSUM_H

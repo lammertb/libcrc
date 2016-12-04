@@ -182,10 +182,12 @@ testall${EXEEXT} :					\
 
 ${BINDIR}prc${EXEEXT} :					\
 		${GENDIR}${OBJDIR}precalc${OBJEXT}	\
+		${GENDIR}${OBJDIR}crc32_table${OBJEXT}	\
 		${GENDIR}${OBJDIR}crc64_table${OBJEXT}	\
 		Makefile
 	${LINK}	${XFLAG}${BINDIR}prc${EXEEXT}		\
 		${GENDIR}${OBJDIR}precalc${OBJEXT}	\
+		${GENDIR}${OBJDIR}crc32_table${OBJEXT}	\
 		${GENDIR}${OBJDIR}crc64_table${OBJEXT}
 	${STRIP} ${BINDIR}prc${EXEEXT}
 
@@ -235,6 +237,9 @@ ${LIBDIR}libcrc${LIBEXT} :			\
 # Lookup table include file dependencies
 #
 
+${TABDIR}gentab32.inc			: ${BINDIR}prc${EXEEXT}
+	${BINDIR}prc --crc32 ${TABDIR}gentab32.inc
+
 ${TABDIR}gentab64.inc			: ${BINDIR}prc${EXEEXT}
 	${BINDIR}prc --crc64 ${TABDIR}gentab64.inc
 
@@ -246,7 +251,7 @@ ${OBJDIR}crc8${OBJEXT}			: ${SRCDIR}crc8.c ${INCDIR}checksum.h
 
 ${OBJDIR}crc16${OBJEXT}			: ${SRCDIR}crc16.c ${INCDIR}checksum.h
 
-${OBJDIR}crc32${OBJEXT}			: ${SRCDIR}crc32.c ${INCDIR}checksum.h
+${OBJDIR}crc32${OBJEXT}			: ${SRCDIR}crc32.c ${INCDIR}checksum.h ${TABDIR}gentab32.inc
 
 ${OBJDIR}crc64${OBJEXT}			: ${SRCDIR}crc64.c ${INCDIR}checksum.h ${TABDIR}gentab64.inc
 
@@ -267,3 +272,10 @@ ${TSTDIR}${OBJDIR}testall${OBJEXT}	: ${TSTDIR}testall.c ${TSTDIR}testall.h
 ${TSTDIR}${OBJDIR}testcrc${OBJEXT}	: ${TSTDIR}testcrc.c ${TSTDIR}testall.h ${INCDIR}checksum.h
 
 ${TSTDIR}${OBJDIR}testnmea${OBJEXT}	: ${TSTDIR}testnmea.c ${TSTDIR}testall.h ${INCDIR}checksum.h
+
+${GENDIR}${OBJDIR}crc32_table${OBJEXT}	: ${GENDIR}crc32_table.c ${GENDIR}precalc.h ${INCDIR}checksum.h
+
+${GENDIR}${OBJDIR}crc64_table${OBJEXT}	: ${GENDIR}crc64_table.c ${GENDIR}precalc.h ${INCDIR}checksum.h
+
+${GENDIR}${OBJDIR}precalc${OBJEXT}	: ${GENDIR}precalc.c ${GENDIR}precalc.h
+
