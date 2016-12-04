@@ -52,7 +52,6 @@ static uint16_t         crc_tabdnp[256];
 uint16_t crc_dnp( const unsigned char *input_str, size_t num_bytes ) {
 
 	register uint16_t crc;
-	register uint16_t short_c;
 	uint16_t low_byte;
 	uint16_t high_byte;
 	const unsigned char *ptr;
@@ -65,10 +64,7 @@ uint16_t crc_dnp( const unsigned char *input_str, size_t num_bytes ) {
 
 	if ( ptr != NULL ) for (a=0; a<num_bytes; a++) {
 
-		short_c = 0x00ff & (uint16_t) *ptr;
-		crc     = (crc >> 8) ^ crc_tabdnp[ (crc ^ short_c) & 0xff ];
-
-		ptr++;
+		crc = (crc >> 8) ^ crc_tabdnp[ (crc ^ (uint16_t) *ptr++) & 0x00FF ];
 	}
 
 	crc       = ~crc;
@@ -89,14 +85,9 @@ uint16_t crc_dnp( const unsigned char *input_str, size_t num_bytes ) {
 
 uint16_t update_crc_dnp( uint16_t crc, unsigned char c ) {
 
-	register uint16_t short_c;
-
 	if ( ! crc_tabdnp_init ) init_crcdnp_tab();
 
-	short_c = 0x00ff & (uint16_t) c;
-	crc     = (crc >> 8) ^ crc_tabdnp[ (crc ^ short_c) & 0xff ];
-
-	return crc;
+	return (crc >> 8) ^ crc_tabdnp[ (crc ^ (uint16_t) c) & 0x00FF ];
 
 }  /* update_crc_dnp */
 

@@ -51,7 +51,6 @@ static uint32_t		crc_tab32[256];
 uint32_t crc_32( const unsigned char *input_str, size_t num_bytes ) {
 
 	register uint32_t crc;
-	register uint32_t long_c;
 	const unsigned char *ptr;
 	size_t a;
 
@@ -62,13 +61,10 @@ uint32_t crc_32( const unsigned char *input_str, size_t num_bytes ) {
 
 	if ( ptr != NULL ) for (a=0; a<num_bytes; a++) {
 
-		long_c = 0x000000FFL & (uint32_t)*ptr;
-		crc    = (crc >> 8) ^ crc_tab32[ (crc ^ long_c) & 0xff ];
-
-		ptr++;
+		crc = (crc >> 8) ^ crc_tab32[ (crc ^ (uint32_t) *ptr++) & 0x000000FFul ];
 	}
 
-	return (crc ^ 0xffffffffL);
+	return (crc ^ 0xFFFFFFFFul);
 
 }  /* crc_32 */
 
@@ -81,14 +77,9 @@ uint32_t crc_32( const unsigned char *input_str, size_t num_bytes ) {
 
 uint32_t update_crc_32( uint32_t crc, unsigned char c ) {
 
-	register uint32_t long_c;
-
 	if ( ! crc_tab32_init ) init_crc32_tab();
 
-	long_c = 0x000000ffL & (uint32_t)c;
-	crc    = (crc >> 8) ^ crc_tab32[ (crc ^ long_c) & 0xff ];
-
-	return crc;
+	return (crc >> 8) ^ crc_tab32[ (crc ^ (uint32_t) c) & 0x000000FFul ];
 
 }  /* update_crc_32 */
 

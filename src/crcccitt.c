@@ -93,7 +93,6 @@ uint16_t crc_ccitt_ffff( const unsigned char *input_str, size_t num_bytes ) {
 static uint16_t crc_ccitt_generic( const unsigned char *input_str, size_t num_bytes, uint16_t start_value ) {
 
 	register uint16_t crc;
-	register uint16_t short_c;
 	const unsigned char *ptr;
 	size_t a;
 
@@ -104,10 +103,7 @@ static uint16_t crc_ccitt_generic( const unsigned char *input_str, size_t num_by
 
 	if ( ptr != NULL ) for (a=0; a<num_bytes; a++) {
 
-		short_c = 0x00ff & (uint16_t) *ptr;
-		crc     = (crc << 8) ^ crc_tabccitt[ (crc >> 8) ^ short_c ];
-
-		ptr++;
+		crc = (crc << 8) ^ crc_tabccitt[ ((crc >> 8) ^ (uint16_t) *ptr++) & 0x00FF ];
 	}
 
 	return crc;
@@ -123,14 +119,9 @@ static uint16_t crc_ccitt_generic( const unsigned char *input_str, size_t num_by
 
 uint16_t update_crc_ccitt( uint16_t crc, unsigned char c ) {
 
-	register uint16_t short_c;
-
 	if ( ! crc_tabccitt_init ) init_crcccitt_tab();
 
-	short_c = 0x00ff & (uint16_t) c;
-	crc     = (crc << 8) ^ crc_tabccitt[ (crc >> 8) ^ short_c ];
-
-	return crc;
+	return (crc << 8) ^ crc_tabccitt[ ((crc >> 8) ^ (uint16_t) c) & 0x00FF ];
 
 }  /* update_crc_ccitt */
 

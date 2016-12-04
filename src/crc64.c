@@ -51,7 +51,6 @@ static uint64_t		crc_tab64[256];
 uint64_t crc_64_ecma( const unsigned char *input_str, size_t num_bytes ) {
 
 	register uint64_t crc;
-	register uint64_t long_c;
 	const unsigned char *ptr;
 	size_t a;
 
@@ -62,10 +61,7 @@ uint64_t crc_64_ecma( const unsigned char *input_str, size_t num_bytes ) {
 
 	if ( ptr != NULL ) for (a=0; a<num_bytes; a++) {
 
-		long_c = 0x00000000000000FFull & (uint64_t)*ptr;
-		crc    = (crc <<  8) ^ crc_tab64[ (crc >> 56) ^ long_c ];
-
-		ptr++;
+		crc = (crc << 8) ^ crc_tab64[ ((crc >> 56) ^ (uint64_t) *ptr++) & 0x00000000000000FFull ];
 	}
 
 	return crc;
@@ -81,14 +77,9 @@ uint64_t crc_64_ecma( const unsigned char *input_str, size_t num_bytes ) {
 
 uint64_t update_crc_64( uint64_t crc, unsigned char c ) {
 
-	register uint64_t long_c;
-
 	if ( ! crc_tab64_init ) init_crc64_tab();
 
-	long_c = 0x00000000000000FFull & (uint64_t)c;
-	crc    = (crc <<  8) ^ crc_tab64[ (crc >> 56) ^ long_c ];
-
-	return crc;
+	return (crc << 8) ^ crc_tab64[ ((crc >> 56) ^ (uint64_t) c) & 0x00000000000000FFull ];
 
 }  /* update_crc_64 */
 
