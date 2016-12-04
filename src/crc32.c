@@ -50,7 +50,7 @@ static uint32_t		crc_tab32[256];
 
 uint32_t crc_32( const unsigned char *input_str, size_t num_bytes ) {
 
-	register uint32_t crc;
+	uint32_t crc;
 	const unsigned char *ptr;
 	size_t a;
 

@@ -47,7 +47,8 @@ struct chk_tp {					/*						*/
 	uint8_t		crc8;			/* The  8 bit wide CRC8 of the input string	*/
 	uint16_t	crc16;			/* The 16 bit wide CRC16 of the input string	*/
 	uint32_t	crc32;			/* The 32 bit wide CRC32 of the input string	*/
-	uint64_t	crc64;			/* The 64 bit wide CRC64 of the input string	*/
+	uint64_t	crc64_ecma;		/* The 64 bit wide CRC64-ECMA of the input	*/
+	uint64_t	crc64_we;		/* The 64 bit wide CRC64-WE of the input string	*/
 	uint16_t	crcdnp;			/* The 16 bit wide DNP CRC of the string	*/
 	uint16_t	crcmodbus;		/* The 16 bit wide Modbus CRC of the string	*/
 	uint16_t	crcsick;		/* The 16 bit wide Sick CRC of the string	*/
@@ -59,11 +60,11 @@ struct chk_tp {					/*						*/
 						/************************************************/
 
 static struct chk_tp checks[] = {
-	{ "123456789",    0xA2, 0xBB3D, 0xCBF43926ul, 0x6C40DF5F0B497347ull, 0x82EA, 0x4B37, 0x56A6, 0x31C3, 0xE5CC, 0x29B1, 0x8921 },
-	{ "Lammert Bies", 0xA5, 0xB638, 0x43C04CA6ul, 0xF806F4F5C0F3257Cull, 0x4583, 0xB45C, 0x1108, 0xCEC8, 0x67A2, 0x4A31, 0xF80D },
-	{ "",             0x00, 0x0000, 0x00000000ul, 0x0000000000000000ull, 0xFFFF, 0xFFFF, 0x0000, 0x0000, 0x1D0F, 0xFFFF, 0x0000 },
-	{ " ",            0x86, 0xD801, 0xE96CCF45ul, 0xCC7AF1FF21C30BDEull, 0x50D6, 0x98BE, 0x2000, 0x2462, 0xE8FE, 0xC592, 0x0221 },
-	{ NULL,           0,    0,      0,            0,                     0,      0,      0,      0,      0,      0,      0      }
+	{ "123456789",    0xA2, 0xBB3D, 0xCBF43926ul, 0x6C40DF5F0B497347ull, 0x62EC59E3F1A4F00Aull, 0x82EA, 0x4B37, 0x56A6, 0x31C3, 0xE5CC, 0x29B1, 0x8921 },
+	{ "Lammert Bies", 0xA5, 0xB638, 0x43C04CA6ul, 0xF806F4F5C0F3257Cull, 0xFE25A9F50630F789ull, 0x4583, 0xB45C, 0x1108, 0xCEC8, 0x67A2, 0x4A31, 0xF80D },
+	{ "",             0x00, 0x0000, 0x00000000ul, 0x0000000000000000ull, 0x0000000000000000ull, 0xFFFF, 0xFFFF, 0x0000, 0x0000, 0x1D0F, 0xFFFF, 0x0000 },
+	{ " ",            0x86, 0xD801, 0xE96CCF45ul, 0xCC7AF1FF21C30BDEull, 0x568617D9EF46BE26ull, 0x50D6, 0x98BE, 0x2000, 0x2462, 0xE8FE, 0xC592, 0x0221 },
+	{ NULL,           0,    0,      0,            0,                     0,                     0,      0,      0,      0,      0,      0,      0      }
 };
 
 /*
@@ -89,7 +90,8 @@ int test_crc( bool verbose ) {
 	uint16_t crcffff;
 	uint16_t crckermit;
 	uint32_t crc32;
-	uint64_t crc64;
+	uint64_t crc64_ecma;
+	uint64_t crc64_we;
 
 	errors = 0;
 
@@ -101,17 +103,18 @@ int test_crc( bool verbose ) {
 		ptr = (const unsigned char *) checks[a].input;
 		len = strlen( checks[a].input );
 
-		crc8      = crc_8(          ptr, len );
-		crc16     = crc_16(         ptr, len );
-		crc32     = crc_32(         ptr, len );
-		crc64     = crc_64_ecma(    ptr, len );
-		crcdnp    = crc_dnp(        ptr, len );
-		crcmodbus = crc_modbus(     ptr, len );
-		crcsick   = crc_sick(       ptr, len );
-		crcxmodem = crc_xmodem(     ptr, len );
-		crc1d0f   = crc_ccitt_1d0f( ptr, len );
-		crcffff   = crc_ccitt_ffff( ptr, len );
-		crckermit = crc_kermit(     ptr, len );
+		crc8       = crc_8(          ptr, len );
+		crc16      = crc_16(         ptr, len );
+		crc32      = crc_32(         ptr, len );
+		crc64_ecma = crc_64_ecma(    ptr, len );
+		crc64_we   = crc_64_we(      ptr, len );
+		crcdnp     = crc_dnp(        ptr, len );
+		crcmodbus  = crc_modbus(     ptr, len );
+		crcsick    = crc_sick(       ptr, len );
+		crcxmodem  = crc_xmodem(     ptr, len );
+		crc1d0f    = crc_ccitt_1d0f( ptr, len );
+		crcffff    = crc_ccitt_ffff( ptr, len );
+		crckermit  = crc_kermit(     ptr, len );
 
 		if ( crc8 != checks[a].crc8 ) {
 
@@ -134,10 +137,17 @@ int test_crc( bool verbose ) {
 			errors++;
 		}
 
-		if ( crc64 != checks[a].crc64 ) {
+		if ( crc64_ecma != checks[a].crc64_ecma ) {
 
-			if ( verbose ) printf( "\n    FAIL: CRC64 \"%s\" returns 0x%016" PRIX64 ", not 0x%016" PRIX64
-							, checks[a].input, crc64, checks[a].crc64 );
+			if ( verbose ) printf( "\n    FAIL: CRC64 ECMA \"%s\" returns 0x%016" PRIX64 ", not 0x%016" PRIX64
+							, checks[a].input, crc64_ecma, checks[a].crc64_ecma );
+			errors++;
+		}
+
+		if ( crc64_we != checks[a].crc64_we ) {
+
+			if ( verbose ) printf( "\n    FAIL: CRC64 WE \"%s\" returns 0x%016" PRIX64 ", not 0x%016" PRIX64
+							, checks[a].input, crc64_we, checks[a].crc64_we );
 			errors++;
 		}
 

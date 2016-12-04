@@ -51,7 +51,7 @@ static uint16_t         crc_tabdnp[256];
 
 uint16_t crc_dnp( const unsigned char *input_str, size_t num_bytes ) {
 
-	register uint16_t crc;
+	uint16_t crc;
 	uint16_t low_byte;
 	uint16_t high_byte;
 	const unsigned char *ptr;

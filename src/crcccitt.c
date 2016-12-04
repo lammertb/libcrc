@@ -92,7 +92,7 @@ uint16_t crc_ccitt_ffff( const unsigned char *input_str, size_t num_bytes ) {
 
 static uint16_t crc_ccitt_generic( const unsigned char *input_str, size_t num_bytes, uint16_t start_value ) {
 
-	register uint16_t crc;
+	uint16_t crc;
 	const unsigned char *ptr;
 	size_t a;
 

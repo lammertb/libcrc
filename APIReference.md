@@ -15,6 +15,7 @@ and can be compiled with any modern C compiler. The API to the library is descri
 * [`crc_16( input_str, num_bytes );`](doc/crc_16.md)
 * [`crc_32( input_str, num_bytes );`](doc/crc_32.md)
 * [`crc_64_ecma( input_str, num_bytes );`](doc/crc_64_ecma.md)
+* [`crc_64_we( input_str, num_bytes );`](doc/crc_64_we.md)
 * [`crc_ccitt_1d0f( input_str, num_bytes );`](doc/crc_ccitt_1d0f.md)
 * [`crc_ccitt_ffff( input_str, num_bytes );`](doc/crc_ccitt_ffff.md)
 * [`crc_dnp( input_str, num_bytes );`](doc/crc_dnp.md)

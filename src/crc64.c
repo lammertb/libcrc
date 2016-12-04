@@ -50,7 +50,7 @@ static uint64_t		crc_tab64[256];
 
 uint64_t crc_64_ecma( const unsigned char *input_str, size_t num_bytes ) {
 
-	register uint64_t crc;
+	uint64_t crc;
 	const unsigned char *ptr;
 	size_t a;
 
@@ -67,6 +67,34 @@ uint64_t crc_64_ecma( const unsigned char *input_str, size_t num_bytes ) {
 	return crc;
 
 }  /* crc_64_ecma */
+
+/*
+ * uint64_t crc_64_we( const unsigned char *input_str, size_t num_bytes );
+ *
+ * The function crc_64_we() calculates in one pass the CRC64-WE 64 bit CRC
+ * value for a byte string that is passed to the function together with a
+ * parameter indicating the length.
+ */
+
+uint64_t crc_64_we( const unsigned char *input_str, size_t num_bytes ) {
+
+	uint64_t crc;
+	const unsigned char *ptr;
+	size_t a;
+
+	if ( ! crc_tab64_init ) init_crc64_tab();
+
+	crc = CRC_START_64_WE;
+	ptr = input_str;
+
+	if ( ptr != NULL ) for (a=0; a<num_bytes; a++) {
+
+		crc = (crc << 8) ^ crc_tab64[ ((crc >> 56) ^ (uint64_t) *ptr++) & 0x00000000000000FFull ];
+	}
+
+	return crc ^ 0xFFFFFFFFFFFFFFFFull;
+
+}  /* crc_64_we */
 
 /*
  * uint64_t update_crc_64( uint64_t crc, unsigned char c );

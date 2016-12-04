@@ -51,7 +51,7 @@ static uint16_t         crc_tab16[256];
 
 uint16_t crc_16( const unsigned char *input_str, size_t num_bytes ) {
 
-	register uint16_t crc;
+	uint16_t crc;
 	const unsigned char *ptr;
 	size_t a;
 
@@ -79,7 +79,7 @@ uint16_t crc_16( const unsigned char *input_str, size_t num_bytes ) {
 
 uint16_t crc_modbus( const unsigned char *input_str, size_t num_bytes ) {
 
-	register uint16_t crc;
+	uint16_t crc;
 	const unsigned char *ptr;
 	size_t a;
 

@@ -69,6 +69,7 @@
 #define		CRC_START_DNP		0x0000
 #define		CRC_START_32		0xFFFFFFFFul
 #define		CRC_START_64_ECMA	0x0000000000000000ull
+#define		CRC_START_64_WE		0xFFFFFFFFFFFFFFFFull
 
 /*
  * Prototype list of global functions
@@ -79,6 +80,7 @@ uint8_t			crc_8(              const unsigned char *input_str, size_t num_bytes  
 uint16_t		crc_16(             const unsigned char *input_str, size_t num_bytes       );
 uint32_t		crc_32(             const unsigned char *input_str, size_t num_bytes       );
 uint64_t		crc_64_ecma(        const unsigned char *input_str, size_t num_bytes       );
+uint64_t		crc_64_we(          const unsigned char *input_str, size_t num_bytes       );
 uint16_t		crc_ccitt_1d0f(     const unsigned char *input_str, size_t num_bytes       );
 uint16_t		crc_ccitt_ffff(     const unsigned char *input_str, size_t num_bytes       );
 uint16_t		crc_dnp(            const unsigned char *input_str, size_t num_bytes       );

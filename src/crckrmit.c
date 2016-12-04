@@ -50,7 +50,7 @@ static uint16_t		crc_tab[256];
 
 uint16_t crc_kermit( const unsigned char *input_str, size_t num_bytes ) {
 
-	register uint16_t crc;
+	uint16_t crc;
 	uint16_t low_byte;
 	uint16_t high_byte;
 	const unsigned char *ptr;
