@@ -8,8 +8,13 @@ test/obj/*.obj
 test/obj/*.o
 examples/obj/*.obj
 examples/obj/*.o
+precalc/obj/*.obj
+precalc/obj/*.o
+tab/*.inc
 make.exe
 testall.exe
 testall
 tstcrc.exe
 tstcrc
+precalc.exe
+precalc

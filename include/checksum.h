@@ -97,4 +97,10 @@ uint16_t		update_crc_dnp(     uint16_t crc, unsigned char c                     
 uint16_t		update_crc_kermit(  uint16_t crc, unsigned char c                          );
 uint16_t		update_crc_sick(    uint16_t crc, unsigned char c, unsigned char prev_byte );
 
+/*
+ * Global CRC lookup tables
+ */
+
+extern const uint64_t	crc64_tab[];
+
 #endif  // DEF_LIBCRC_CHECKSUM_H

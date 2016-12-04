@@ -58,10 +58,12 @@
 
 ifeq ($(OS),Windows_NT)
 
+GENDIR = precalc\\
 INCDIR = include\\
 LIBDIR = lib\\
 OBJDIR = obj\\
 SRCDIR = src\\
+TABDIR = tab\\
 TSTDIR = test\\
 EXADIR = examples\\
 
@@ -83,10 +85,12 @@ CFLAGS = -Ox -Ot -MT -GT -volatile:iso -I${INCDIR} -nologo -J -sdl -Wall -WX \
 
 else
 
+GENDIR = precalc/
 INCDIR = include/
 LIBDIR = lib/
 OBJDIR = obj/
 SRCDIR = src/
+TABDIR = tab/
 TSTDIR = test/
 EXADIR = examples/
 
@@ -119,6 +123,9 @@ ${OBJDIR}%${OBJEXT} : ${SRCDIR}%.c
 ${TSTDIR}${OBJDIR}%${OBJEXT} : ${TSTDIR}%.c
 	${CC} -c ${CFLAGS} ${OFLAG}$@ $<
 
+${GENDIR}${OBJDIR}%${OBJEXT} : ${GENDIR}%.c
+	${CC} -c ${CFLAGS} ${OFLAG}$@ $<
+
 ${EXADIR}${OBJDIR}%${OBJEXT} : ${EXADIR}%.c
 	${CC} -c ${CFLAGS} ${OFLAG}$@ $<
 
@@ -139,9 +146,12 @@ all:							\
 
 clean:
 	${RM} ${OBJDIR}*${OBJEXT}
+	${RM} ${TABDIR}*.inc
 	${RM} ${EXADIR}${OBJDIR}*${OBJEXT}
 	${RM} ${TSTDIR}${OBJDIR}*${OBJEXT}
+	${RM} ${GENDIR}${OBJDIR}*${OBJEXT}
 	${RM} ${LIBDIR}libcrc${LIBEXT}
+	${RM} precalc${EXEEXT}
 	${RM} testall${EXEEXT}
 	${RM} tstcrc${EXEEXT}
 
@@ -162,6 +172,20 @@ testall${EXEEXT} :					\
 		${TSTDIR}${OBJDIR}testnmea${OBJEXT}	\
 		${LIBDIR}libcrc${LIBEXT}
 	${STRIP} testall${EXEEXT}
+
+#
+# The precalc program is used during compilation to generate the lookup tables
+# for the CRC calculation routines.
+#
+
+precalc${EXEEXT} :					\
+		${GENDIR}${OBJDIR}precalc${OBJEXT}	\
+		${GENDIR}${OBJDIR}crc64_table${OBJEXT}	\
+		Makefile
+	${LINK}	${XFLAG}precalc${EXEEXT}		\
+		${GENDIR}${OBJDIR}precalc${OBJEXT}	\
+		${GENDIR}${OBJDIR}crc64_table${OBJEXT}
+	${STRIP} precalc${EXEEXT}
 
 #
 # The tstcrc program can be run to calculate the CRC values of manual input or
@@ -206,6 +230,13 @@ ${LIBDIR}libcrc${LIBEXT} :			\
 		${RANLIB}    ${LIBDIR}libcrc${LIBEXT}
 
 #
+# Lookup table include file dependencies
+#
+
+${TABDIR}gentab64.inc			: precalc${EXEEXT}
+	precalc --crc64 ${TABDIR}gentab64.inc
+
+#
 # Individual source files with their header file dependencies
 #
 
@@ -215,7 +246,7 @@ ${OBJDIR}crc16${OBJEXT}			: ${SRCDIR}crc16.c ${INCDIR}checksum.h
 
 ${OBJDIR}crc32${OBJEXT}			: ${SRCDIR}crc32.c ${INCDIR}checksum.h
 
-${OBJDIR}crc64${OBJEXT}			: ${SRCDIR}crc64.c ${INCDIR}checksum.h
+${OBJDIR}crc64${OBJEXT}			: ${SRCDIR}crc64.c ${INCDIR}checksum.h ${TABDIR}gentab64.inc
 
 ${OBJDIR}crcccitt${OBJEXT}		: ${SRCDIR}crcccitt.c ${INCDIR}checksum.h
 
