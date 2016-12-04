@@ -51,9 +51,8 @@ static uint16_t         crc_tab16[256];
 
 uint16_t crc_16( const unsigned char *input_str, size_t num_bytes ) {
 
-	uint16_t crc;
-	uint16_t tmp;
-	uint16_t short_c;
+	register uint16_t crc;
+	register uint16_t short_c;
 	const unsigned char *ptr;
 	size_t a;
 
@@ -64,9 +63,8 @@ uint16_t crc_16( const unsigned char *input_str, size_t num_bytes ) {
 
 	if ( ptr != NULL ) for (a=0; a<num_bytes; a++) {
 
-		short_c = 0x00ff & (uint16_t) *ptr;
-		tmp     =  crc       ^ short_c;
-		crc     = (crc >> 8) ^ crc_tab16[ tmp & 0xff ];
+		short_c = 0x00ff & (uint16_t)*ptr;
+		crc     = (crc >> 8) ^ crc_tab16[ (crc ^ short_c) & 0xff ];
 
 		ptr++;
 	}
@@ -85,9 +83,8 @@ uint16_t crc_16( const unsigned char *input_str, size_t num_bytes ) {
 
 uint16_t crc_modbus( const unsigned char *input_str, size_t num_bytes ) {
 
-	uint16_t crc;
-	uint16_t tmp;
-	uint16_t short_c;
+	register uint16_t crc;
+	register uint16_t short_c;
 	const unsigned char *ptr;
 	size_t a;
 
@@ -98,9 +95,8 @@ uint16_t crc_modbus( const unsigned char *input_str, size_t num_bytes ) {
 
 	if ( ptr != NULL ) for (a=0; a<num_bytes; a++) {
 
-		short_c = 0x00ff & (uint16_t) *ptr;
-		tmp     =  crc       ^ short_c;
-		crc     = (crc >> 8) ^ crc_tab16[ tmp & 0xff ];
+		short_c = 0x00ff & (uint16_t)*ptr;
+		crc     = (crc >> 8) ^ crc_tab16[ (crc ^ short_c) & 0xff ];
 
 		ptr++;
 	}
@@ -118,15 +114,12 @@ uint16_t crc_modbus( const unsigned char *input_str, size_t num_bytes ) {
 
 uint16_t update_crc_16( uint16_t crc, unsigned char c ) {
 
-	uint16_t tmp;
-	uint16_t short_c;
-
-	short_c = 0x00ff & (uint16_t) c;
+	register uint16_t short_c;
 
 	if ( ! crc_tab16_init ) init_crc16_tab();
 
-	tmp =  crc       ^ short_c;
-	crc = (crc >> 8) ^ crc_tab16[ tmp & 0xff ];
+	short_c = 0x00ff & (uint16_t)c;
+	crc     = (crc >> 8) ^ crc_tab16[ (crc ^ short_c) & 0xff ];
 
 	return crc;
 

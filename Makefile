@@ -186,6 +186,7 @@ ${LIBDIR}libcrc${LIBEXT} :			\
 	${OBJDIR}crc8${OBJEXT}			\
 	${OBJDIR}crc16${OBJEXT}			\
 	${OBJDIR}crc32${OBJEXT}			\
+	${OBJDIR}crc64${OBJEXT}			\
 	${OBJDIR}crcccitt${OBJEXT}		\
 	${OBJDIR}crcdnp${OBJEXT}		\
 	${OBJDIR}crckrmit${OBJEXT}		\
@@ -195,6 +196,7 @@ ${LIBDIR}libcrc${LIBEXT} :			\
 		${RM}        ${LIBDIR}libcrc${LIBEXT}
 		${AR} ${ARQC}${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crc16${OBJEXT}
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crc32${OBJEXT}
+		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crc64${OBJEXT}
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crc8${OBJEXT}
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crcccitt${OBJEXT}
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crcdnp${OBJEXT}
@@ -212,6 +214,8 @@ ${OBJDIR}crc8${OBJEXT}			: ${SRCDIR}crc8.c ${INCDIR}checksum.h
 ${OBJDIR}crc16${OBJEXT}			: ${SRCDIR}crc16.c ${INCDIR}checksum.h
 
 ${OBJDIR}crc32${OBJEXT}			: ${SRCDIR}crc32.c ${INCDIR}checksum.h
+
+${OBJDIR}crc64${OBJEXT}			: ${SRCDIR}crc64.c ${INCDIR}checksum.h
 
 ${OBJDIR}crcccitt${OBJEXT}		: ${SRCDIR}crcccitt.c ${INCDIR}checksum.h
 
