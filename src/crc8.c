@@ -81,8 +81,7 @@ uint8_t crc_8( const unsigned char *input_str, size_t num_bytes ) {
 
 	if ( ptr != NULL ) for (a=0; a<num_bytes; a++) {
 
-		crc = sht75_crc_table[(*ptr) ^ crc];
-		ptr++;
+		crc = sht75_crc_table[(*ptr++) ^ crc];
 	}
 
 	return crc;
