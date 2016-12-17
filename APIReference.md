@@ -1,7 +1,6 @@
 #Libcrc API Reference
 
-Libcrc is a library to calculate various checksums of data blobs. The library is written in C
-and can be compiled with any modern C compiler. The API to the library is described in this document.
+Libcrc is a library to calculate various checksums of data blobs. The library is written in C and can be compiled with any modern C compiler. The API to the library is described in this document.
 
 ## Constants
 
