@@ -19,6 +19,7 @@ Libcrc is a library to calculate various checksums of data blobs. The library is
 * [`crc_ccitt_ffff( input_str, num_bytes );`](doc/crc_ccitt_ffff.md)
 * [`crc_dnp( input_str, num_bytes );`](doc/crc_dnp.md)
 * [`crc_kermit( input_str, num_bytes );`](doc/crc_kermit.md)
+* [`crc_modbus( input_str, num_bytes );`](doc/crc_modbus.md)
 * [`crc_sick( input_str, num_bytes );`](doc/crc_sick.md)
 * [`crc_xmodem( input_str, num_bytes );`](doc/crc_xmodem.md)
 * [`update_crc_8( crc, c );`](doc/update_crc_8.md)
