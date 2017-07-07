@@ -99,7 +99,10 @@ int main( int argc, char *argv[] ) {
 	if ( do_ascii  ||  do_hex ) {
 
 		printf( "Input: " );
-		fgets( input_string, MAX_STRING_SIZE-1, stdin );
+		if( fgets( input_string, MAX_STRING_SIZE-1, stdin ) == NULL ){
+                   // Print the error
+                   perror("Error");
+                }
 	}
 
 	if ( do_ascii ) {
