@@ -5,7 +5,7 @@
  *
  * This file is licensed under the MIT License as stated below
  *
- * Copyright (c) 1999-2016 Lammert Bies
+ * Copyright (c) 1999-2018 Lammert Bies
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,6 +34,7 @@
 #ifndef DEF_LIBCRC_CHECKSUM_H
 #define DEF_LIBCRC_CHECKSUM_H
 
+#include <stddef.h>
 #include <stdint.h>
 
 /*
