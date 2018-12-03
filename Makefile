@@ -5,7 +5,7 @@
 #
 # This file is licensed under the MIT License as stated below
 #
-# Copyright (c) 1999-2016 Lammert Bies
+# Copyright (c) 1999-2018 Lammert Bies
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -111,7 +111,8 @@ ARQ    = q
 RANLIB = ranlib
 CFLAGS = -Wall -Wextra -Wstrict-prototypes -Wshadow -Wpointer-arith \
 	-Wcast-qual -Wcast-align -Wwrite-strings -Wredundant-decls \
-	-Wnested-externs -Werror -O3 -funsigned-char -I${INCDIR}
+	-Wnested-externs -Wformat-truncation -Werror -O3 \
+	-funsigned-char -I${INCDIR}
 
 endif
 
