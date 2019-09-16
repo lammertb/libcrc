@@ -5,7 +5,7 @@
 #
 # This file is licensed under the MIT License as stated below
 #
-# Copyright (c) 1999-2018 Lammert Bies
+# Copyright (c) 1999-2019 Lammert Bies
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -82,7 +82,7 @@ ARQC   = /NOLOGO /OUT:
 ARQ    = /NOLOGO
 RANLIB = dir
 CFLAGS = -Ox -Ot -MT -GT -volatile:iso -I${INCDIR} -nologo -J -sdl -Wall -WX \
-	-wd4464 -wd4710 -wd4711 -wd4201 -wd4820
+	-wd4464 -wd4668 -wd4710 -wd4711 -wd4201 -wd4820
 
 else
 
