@@ -96,23 +96,32 @@ TABDIR = tab/
 TSTDIR = test/
 EXADIR = examples/
 
-CC     = cc
-LINK   = cc
+CC     = ${CROSS_COMPILE}gcc
+LINK   = ${CROSS_COMPILE}gcc
 RM     = /bin/rm -f
-STRIP  = strip
+STRIP  = ${CROSS_COMPILE}strip
 OBJEXT = .o
 LIBEXT = .a
 EXEEXT =
 OFLAG  = -o
 XFLAG  = -o
-AR     = ar
+AR     = ${CROSS_COMPILE}ar
 ARQC   = qc 
 ARQ    = q
-RANLIB = ranlib
+RANLIB = ${CROSS_COMPILE}ranlib
 CFLAGS = -Wall -Wextra -Wstrict-prototypes -Wshadow -Wpointer-arith \
 	-Wcast-qual -Wcast-align -Wwrite-strings -Wredundant-decls \
 	-Wnested-externs -Werror -O3 \
 	-funsigned-char -I${INCDIR}
+
+ifdef CROSS_COMPILE
+
+CC_HOST    = gcc
+LINK_HOST  = gcc
+STRIP_HOST = strip
+AR_HOST    = ar
+
+endif
 
 endif
 
@@ -128,6 +137,13 @@ ${TSTDIR}${OBJDIR}%${OBJEXT} : ${TSTDIR}%.c
 
 ${GENDIR}${OBJDIR}%${OBJEXT} : ${GENDIR}%.c
 	${CC} -c ${CFLAGS} ${OFLAG}$@ $<
+
+ifdef CROSS_COMPILE
+
+${GENDIR}host_${OBJDIR}%${OBJEXT} : ${GENDIR}%.c
+	${CC_HOST} -c ${CFLAGS} ${OFLAG}$@ $<
+
+endif
 
 ${EXADIR}${OBJDIR}%${OBJEXT} : ${EXADIR}%.c
 	${CC} -c ${CFLAGS} ${OFLAG}$@ $<
@@ -153,8 +169,10 @@ clean:
 	${RM} ${EXADIR}${OBJDIR}*${OBJEXT}
 	${RM} ${TSTDIR}${OBJDIR}*${OBJEXT}
 	${RM} ${GENDIR}${OBJDIR}*${OBJEXT}
+	${RM} ${GENDIR}host_${OBJDIR}*${OBJEXT}
 	${RM} ${LIBDIR}libcrc${LIBEXT}
 	${RM} ${BINDIR}prc${EXEEXT}
+	${RM} ${BINDIR}prc_host${EXEEXT}
 	${RM} testall${EXEEXT}
 	${RM} tstcrc${EXEEXT}
 
@@ -191,6 +209,25 @@ ${BINDIR}prc${EXEEXT} :					\
 		${GENDIR}${OBJDIR}crc32_table${OBJEXT}	\
 		${GENDIR}${OBJDIR}crc64_table${OBJEXT}
 	${STRIP} ${BINDIR}prc${EXEEXT}
+
+#
+# Compile prc program for host when cross compiling
+#
+
+ifdef CROSS_COMPILE
+
+${BINDIR}prc_host${EXEEXT} :					\
+		${GENDIR}host_${OBJDIR}precalc${OBJEXT}	\
+		${GENDIR}host_${OBJDIR}crc32_table${OBJEXT}	\
+		${GENDIR}host_${OBJDIR}crc64_table${OBJEXT}	\
+		Makefile
+	${LINK_HOST}	${XFLAG}${BINDIR}prc_host${EXEEXT}		\
+		${GENDIR}host_${OBJDIR}precalc${OBJEXT}		\
+		${GENDIR}host_${OBJDIR}crc32_table${OBJEXT}	\
+		${GENDIR}host_${OBJDIR}crc64_table${OBJEXT}
+	${STRIP_HOST} ${BINDIR}prc_host${EXEEXT}
+
+endif
 
 #
 # The tstcrc program can be run to calculate the CRC values of manual input or
@@ -238,11 +275,27 @@ ${LIBDIR}libcrc${LIBEXT} :			\
 # Lookup table include file dependencies
 #
 
+ifndef CROSS_COMPILE
+
 ${TABDIR}gentab32.inc			: ${BINDIR}prc${EXEEXT}
 	${BINDIR}prc --crc32 ${TABDIR}gentab32.inc
 
 ${TABDIR}gentab64.inc			: ${BINDIR}prc${EXEEXT}
 	${BINDIR}prc --crc64 ${TABDIR}gentab64.inc
+
+else
+
+${TABDIR}gentab32.inc			: \
+	${BINDIR}prc${EXEEXT}	\
+	${BINDIR}prc_host${EXEEXT}
+	${BINDIR}prc_host --crc32 ${TABDIR}gentab32.inc
+
+${TABDIR}gentab64.inc			: \
+	${BINDIR}prc${EXEEXT}	\
+	${BINDIR}prc_host${EXEEXT}
+	${BINDIR}prc_host --crc64 ${TABDIR}gentab64.inc
+
+endif
 
 #
 # Individual source files with their header file dependencies
@@ -279,4 +332,10 @@ ${GENDIR}${OBJDIR}crc32_table${OBJEXT}	: ${GENDIR}crc32_table.c ${GENDIR}precalc
 ${GENDIR}${OBJDIR}crc64_table${OBJEXT}	: ${GENDIR}crc64_table.c ${GENDIR}precalc.h ${INCDIR}checksum.h
 
 ${GENDIR}${OBJDIR}precalc${OBJEXT}	: ${GENDIR}precalc.c ${GENDIR}precalc.h
+
+${GENDIR}host_${OBJDIR}crc32_table${OBJEXT}	: ${GENDIR}crc32_table.c ${GENDIR}precalc.h ${INCDIR}checksum.h
+
+${GENDIR}host_${OBJDIR}crc64_table${OBJEXT}	: ${GENDIR}crc64_table.c ${GENDIR}precalc.h ${INCDIR}checksum.h
+
+${GENDIR}host_${OBJDIR}precalc${OBJEXT}	: ${GENDIR}precalc.c ${GENDIR}precalc.h
 

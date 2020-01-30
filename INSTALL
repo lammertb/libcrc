@@ -146,6 +146,8 @@ make all
 
 make clean
 	cleans up the object files, library file and testall executable
+make CROSS_COMPILE=arm-linux-gnueabihf-
+	compile using arm-linux-gnueabihf cross compiler
 
 
 Lammert Bies
