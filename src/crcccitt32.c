@@ -35,8 +35,8 @@
 #include <stdlib.h>
 #include "checksum.h"
 
-static uint32_t		crc_ccitt32_generic( const unsigned char *input_str, size_t num_bytes, uint32_t start_value );
-static void		init_crcccitt32_tab( uint32_t poly, uint32_t swapped);
+static uint32_t         crc_ccitt32_generic( const unsigned char *input_str, size_t num_bytes, uint32_t start_value );
+static void             init_crcccitt32_tab( uint32_t poly, uint32_t swapped);
 
 static bool             crc_tabccitt32_init       = false;
 static uint32_t         crc_tabccitt32[256];
