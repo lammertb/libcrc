@@ -63,6 +63,7 @@ int main( int argc, char *argv[] ) {
 	uint16_t crc_16_val;
 	uint16_t crc_16_modbus_val;
 	uint16_t crc_ccitt_ffff_val;
+	uint32_t crc_ccitt32_ffffffff_val;
 	uint16_t crc_ccitt_0000_val;
 	uint16_t crc_ccitt_1d0f_val;
 	uint16_t crc_dnp_val;
@@ -140,6 +141,7 @@ int main( int argc, char *argv[] ) {
 		crc_sick_val       = 0x0000;
 		crc_ccitt_0000_val = 0x0000;
 		crc_ccitt_ffff_val = 0xffff;
+		crc_ccitt32_ffffffff_val = 0xffffffffL;
 		crc_ccitt_1d0f_val = 0x1d0f;
 		crc_kermit_val     = 0x0000;
 		crc_32_val         = 0xffffffffL;
@@ -159,6 +161,7 @@ int main( int argc, char *argv[] ) {
 				crc_sick_val       = update_crc_sick(   crc_sick_val,       *ptr, prev_byte );
 				crc_ccitt_0000_val = update_crc_ccitt(  crc_ccitt_0000_val, *ptr            );
 				crc_ccitt_ffff_val = update_crc_ccitt(  crc_ccitt_ffff_val, *ptr            );
+				crc_ccitt32_ffffffff_val = update_crc_ccitt32(  crc_ccitt32_ffffffff_val, *ptr            );
 				crc_ccitt_1d0f_val = update_crc_ccitt(  crc_ccitt_1d0f_val, *ptr            );
 				crc_kermit_val     = update_crc_kermit( crc_kermit_val,     *ptr            );
 				crc_32_val         = update_crc_32(     crc_32_val,         *ptr            );
@@ -184,6 +187,7 @@ int main( int argc, char *argv[] ) {
 				crc_sick_val       = update_crc_sick(   crc_sick_val,       hex_val, prev_byte );
 				crc_ccitt_0000_val = update_crc_ccitt(  crc_ccitt_0000_val, hex_val            );
 				crc_ccitt_ffff_val = update_crc_ccitt(  crc_ccitt_ffff_val, hex_val            );
+				crc_ccitt32_ffffffff_val = update_crc_ccitt32(  crc_ccitt32_ffffffff_val, hex_val            );
 				crc_ccitt_1d0f_val = update_crc_ccitt(  crc_ccitt_1d0f_val, hex_val            );
 				crc_kermit_val     = update_crc_kermit( crc_kermit_val,     hex_val            );
 				crc_32_val         = update_crc_32(     crc_32_val,         hex_val            );
@@ -215,6 +219,7 @@ int main( int argc, char *argv[] ) {
 					crc_sick_val       = update_crc_sick(   crc_sick_val,       (unsigned char) ch, prev_byte );
 					crc_ccitt_0000_val = update_crc_ccitt(  crc_ccitt_0000_val, (unsigned char) ch            );
 					crc_ccitt_ffff_val = update_crc_ccitt(  crc_ccitt_ffff_val, (unsigned char) ch            );
+					crc_ccitt32_ffffffff_val = update_crc_ccitt32(  crc_ccitt32_ffffffff_val, (unsigned char) ch            );
 					crc_ccitt_1d0f_val = update_crc_ccitt(  crc_ccitt_1d0f_val, (unsigned char) ch            );
 					crc_kermit_val     = update_crc_kermit( crc_kermit_val,     (unsigned char) ch            );
 					crc_32_val         = update_crc_32(     crc_32_val,         (unsigned char) ch            );
@@ -243,15 +248,16 @@ int main( int argc, char *argv[] ) {
 		high_byte      = (crc_kermit_val & 0x00ff) << 8;
 		crc_kermit_val = low_byte | high_byte;
 
-		printf( "%s%s%s :\nCRC16              = 0x%04" PRIX16 "      /  %" PRIu16 "\n"
-				  "CRC16 (Modbus)     = 0x%04" PRIX16 "      /  %" PRIu16 "\n"
-				  "CRC16 (Sick)       = 0x%04" PRIX16 "      /  %" PRIu16 "\n"
-				  "CRC-CCITT (0x0000) = 0x%04" PRIX16 "      /  %" PRIu16 "\n"
-				  "CRC-CCITT (0xffff) = 0x%04" PRIX16 "      /  %" PRIu16 "\n"
-				  "CRC-CCITT (0x1d0f) = 0x%04" PRIX16 "      /  %" PRIu16 "\n"
-				  "CRC-CCITT (Kermit) = 0x%04" PRIX16 "      /  %" PRIu16 "\n"
-				  "CRC-DNP            = 0x%04" PRIX16 "      /  %" PRIu16 "\n"
-				  "CRC32              = 0x%08" PRIX32 "  /  %" PRIu32 "\n"
+		printf( "%s%s%s :\nCRC16              		= 0x%04" PRIX16 "      /  %" PRIu16 "\n"
+				  "CRC16 (Modbus)     		= 0x%04" PRIX16 "      /  %" PRIu16 "\n"
+				  "CRC16 (Sick)       		= 0x%04" PRIX16 "      /  %" PRIu16 "\n"
+				  "CRC-CCITT (0x0000) 		= 0x%04" PRIX16 "      /  %" PRIu16 "\n"
+				  "CRC-CCITT (0xffff) 		= 0x%04" PRIX16 "      /  %" PRIu16 "\n"
+				  "CRC-CCITT32 (0xffffffff) 	= 0x%08" PRIX32 "  /  %" PRIu32 "\n"
+				  "CRC-CCITT (0x1d0f) 		= 0x%04" PRIX16 "      /  %" PRIu16 "\n"
+				  "CRC-CCITT (Kermit) 		= 0x%04" PRIX16 "      /  %" PRIu16 "\n"
+				  "CRC-DNP            		= 0x%04" PRIX16 "      /  %" PRIu16 "\n"
+				  "CRC32              		= 0x%08" PRIX32 "  /  %" PRIu32 "\n"
 				, (   do_ascii  ||    do_hex ) ? "\""    : ""
 				, ( ! do_ascii  &&  ! do_hex ) ? argv[a] : input_string
 				, (   do_ascii  ||    do_hex ) ? "\""    : ""
@@ -260,6 +266,7 @@ int main( int argc, char *argv[] ) {
 				, crc_sick_val,       crc_sick_val
 				, crc_ccitt_0000_val, crc_ccitt_0000_val
 				, crc_ccitt_ffff_val, crc_ccitt_ffff_val
+				, crc_ccitt32_ffffffff_val, crc_ccitt32_ffffffff_val
 				, crc_ccitt_1d0f_val, crc_ccitt_1d0f_val
 				, crc_kermit_val,     crc_kermit_val
 				, crc_dnp_val,        crc_dnp_val

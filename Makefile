@@ -217,6 +217,7 @@ ${LIBDIR}libcrc${LIBEXT} :			\
 	${OBJDIR}crc32${OBJEXT}			\
 	${OBJDIR}crc64${OBJEXT}			\
 	${OBJDIR}crcccitt${OBJEXT}		\
+	${OBJDIR}crcccitt32${OBJEXT}		\
 	${OBJDIR}crcdnp${OBJEXT}		\
 	${OBJDIR}crckrmit${OBJEXT}		\
 	${OBJDIR}crcsick${OBJEXT}		\
@@ -228,6 +229,7 @@ ${LIBDIR}libcrc${LIBEXT} :			\
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crc64${OBJEXT}
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crc8${OBJEXT}
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crcccitt${OBJEXT}
+		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crcccitt32${OBJEXT}
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crcdnp${OBJEXT}
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crckrmit${OBJEXT}
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crcsick${OBJEXT}
@@ -257,6 +259,7 @@ ${OBJDIR}crc32${OBJEXT}			: ${SRCDIR}crc32.c ${INCDIR}checksum.h ${TABDIR}gentab
 ${OBJDIR}crc64${OBJEXT}			: ${SRCDIR}crc64.c ${INCDIR}checksum.h ${TABDIR}gentab64.inc
 
 ${OBJDIR}crcccitt${OBJEXT}		: ${SRCDIR}crcccitt.c ${INCDIR}checksum.h
+${OBJDIR}crcccitt32${OBJEXT}		: ${SRCDIR}crcccitt32.c ${INCDIR}checksum.h
 
 ${OBJDIR}crcdnp${OBJEXT}		: ${SRCDIR}crcdnp.c ${INCDIR}checksum.h
 
