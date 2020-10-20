@@ -56,17 +56,16 @@ target_include_directories(prc PUBLIC
 			$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/precalc>
 			$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}>
 			)
-add_custom_command( OUTPUT include/libcrc/${TAB32_FILES} COMMAND prc --crc32 ${TAB32_FILES} DEPENDS prc ) 
-add_custom_command( OUTPUT include/libcrc/${TAB64_FILES} COMMAND prc --crc64 ${TAB64_FILES} DEPENDS prc )
+add_custom_command( OUTPUT ${TAB32_FILES} COMMAND prc --crc32 ${TAB32_FILES} DEPENDS prc ) 
+add_custom_command( OUTPUT ${TAB64_FILES} COMMAND prc --crc64 ${TAB64_FILES} DEPENDS prc )
 
 # libcrc library
-add_library( crc SHARED ${SOURCE_FILES} ${INCLUDE_FILES})
+add_library( crc SHARED ${SOURCE_FILES} ${INCLUDE_FILES} ${TAB_FILES} )
 target_include_directories(crc PUBLIC
 			$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 			$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}>
 			)
-
-		set_target_properties(crc PROPERTIES PUBLIC_HEADER ${INCLUDE_FILES} ) 
+set_target_properties(crc PROPERTIES PUBLIC_HEADER ${INCLUDE_FILES} ) 
 
 # tstsrc example
 add_executable( tstsrc ${EXAMPLE_SOURCE_FILES} ${INCLUDE_FILES} )
