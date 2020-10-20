@@ -41,7 +41,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../include/checksum.h"
+#include "libcrc/checksum.h"
 
 #define MAX_STRING_SIZE	2048
 

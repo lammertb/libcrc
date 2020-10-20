@@ -33,7 +33,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "checksum.h"
+#include "libcrc/checksum.h"
 
 /*
  * unsigned char *checksum_NMEA( const unsigned char *input_str, unsigned char *result );
