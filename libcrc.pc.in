@@ -1,0 +1,12 @@
+prefix=@install_prefix@
+exe_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: libcrc
+Description: libcrc
+Version: @PROJECT_VERSION@
+
+Requires:
+Libs: -L${libdir} -lcrc
+Cflags: -I${includedir} -I${includedir}/libcrc
