@@ -33,7 +33,7 @@
  */
 
 #include <stdlib.h>
-#include "checksum.h"
+#include "libcrc/checksum.h"
 
 /*
  * static uint8_t sht75_crc_table[];

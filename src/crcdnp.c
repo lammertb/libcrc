@@ -35,7 +35,7 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
-#include "checksum.h"
+#include "libcrc/checksum.h"
 
 static void             init_crcdnp_tab( void );
 

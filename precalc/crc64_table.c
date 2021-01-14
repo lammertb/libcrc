@@ -33,7 +33,7 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
-#include "checksum.h"
+#include "libcrc/checksum.h"
 #include "precalc.h"
 
 /*

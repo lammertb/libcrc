@@ -33,7 +33,7 @@
  */
 
 #include <stdlib.h>
-#include "checksum.h"
+#include "libcrc/checksum.h"
 
 /*
  * uint16_t crc_sick( const unsigned char *input_str, size_t num_bytes );
