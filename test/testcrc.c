@@ -39,7 +39,7 @@
 #include <string.h>
 #include "testall.h"
 
-#include "../include/checksum.h"
+#include "libcrc/checksum.h"
 
 						/************************************************/
 struct chk_tp {					/*						*/
