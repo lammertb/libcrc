@@ -96,8 +96,8 @@ TABDIR = tab/
 TSTDIR = test/
 EXADIR = examples/
 
-CC     = cc
-LINK   = cc
+CC     ?= cc
+LINK   ?= $(CC)
 RM     = /bin/rm -f
 STRIP  = strip
 OBJEXT = .o
