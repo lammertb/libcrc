@@ -113,6 +113,7 @@ CFLAGS = -Wall -Wextra -Wstrict-prototypes -Wshadow -Wpointer-arith \
 	-Wcast-qual -Wcast-align -Wwrite-strings -Wredundant-decls \
 	-Wnested-externs -Werror -O3 \
 	-funsigned-char -I${INCDIR}
+PKG_CONFIG = pkg-config
 
 endif
 
@@ -168,7 +169,7 @@ testall${EXEEXT} :					\
 		${TSTDIR}${OBJDIR}testcrc${OBJEXT}	\
 		${TSTDIR}${OBJDIR}testnmea${OBJEXT}	\
 		${LIBDIR}libcrc${LIBEXT}		\
-		Makefile
+		Makefile.libcrc
 	${LINK} ${XFLAG}testall${EXEEXT}		\
 		${TSTDIR}${OBJDIR}testall${OBJEXT}	\
 		${TSTDIR}${OBJDIR}testcrc${OBJEXT}	\
@@ -185,7 +186,7 @@ ${BINDIR}prc${EXEEXT} :					\
 		${GENDIR}${OBJDIR}precalc${OBJEXT}	\
 		${GENDIR}${OBJDIR}crc32_table${OBJEXT}	\
 		${GENDIR}${OBJDIR}crc64_table${OBJEXT}	\
-		Makefile
+		Makefile.libcrc
 	${LINK}	${XFLAG}${BINDIR}prc${EXEEXT}		\
 		${GENDIR}${OBJDIR}precalc${OBJEXT}	\
 		${GENDIR}${OBJDIR}crc32_table${OBJEXT}	\
@@ -200,7 +201,7 @@ ${BINDIR}prc${EXEEXT} :					\
 tstcrc${EXEEXT} :					\
 		${EXADIR}${OBJDIR}tstcrc${OBJEXT}	\
 		${LIBDIR}libcrc${LIBEXT}		\
-		Makefile
+		Makefile.libcrc
 	${LINK}	${XFLAG}tstcrc${EXEEXT}			\
 		${EXADIR}${OBJDIR}tstcrc${OBJEXT}	\
 		${LIBDIR}libcrc${LIBEXT}
@@ -222,7 +223,7 @@ ${LIBDIR}libcrc${LIBEXT} :			\
 	${OBJDIR}crckrmit${OBJEXT}		\
 	${OBJDIR}crcsick${OBJEXT}		\
 	${OBJDIR}nmea-chk${OBJEXT}		\
-	Makefile
+	Makefile.libcrc
 		${RM}        ${LIBDIR}libcrc${LIBEXT}
 		${AR} ${ARQC}${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crc16${OBJEXT}
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crc32${OBJEXT}
@@ -283,4 +284,6 @@ ${GENDIR}${OBJDIR}crc32_table${OBJEXT}	: ${GENDIR}crc32_table.c ${GENDIR}precalc
 ${GENDIR}${OBJDIR}crc64_table${OBJEXT}	: ${GENDIR}crc64_table.c ${GENDIR}precalc.h ${INCDIR}checksum.h
 
 ${GENDIR}${OBJDIR}precalc${OBJEXT}	: ${GENDIR}precalc.c ${GENDIR}precalc.h
+
+libcrc.pc                               : libcrc.pc.in
 
