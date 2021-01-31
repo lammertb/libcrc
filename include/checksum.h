@@ -48,6 +48,7 @@
 #define		CRC_POLY_32		0xEDB88320ul
 #define		CRC_POLY_64		0x42F0E1EBA9EA3693ull
 #define		CRC_POLY_CCITT		0x1021
+#define		CRC_POLY_CCITT32        0x04C11DB7ul
 #define		CRC_POLY_DNP		0xA6BC
 #define		CRC_POLY_KERMIT		0x8408
 #define		CRC_POLY_SICK		0x8005
@@ -59,18 +60,19 @@
  * initialization of a CRC value for common used calculation methods.
  */
 
-#define		CRC_START_8		0x00
-#define		CRC_START_16		0x0000
-#define		CRC_START_MODBUS	0xFFFF
-#define		CRC_START_XMODEM	0x0000
-#define		CRC_START_CCITT_1D0F	0x1D0F
-#define		CRC_START_CCITT_FFFF	0xFFFF
-#define		CRC_START_KERMIT	0x0000
-#define		CRC_START_SICK		0x0000
-#define		CRC_START_DNP		0x0000
-#define		CRC_START_32		0xFFFFFFFFul
-#define		CRC_START_64_ECMA	0x0000000000000000ull
-#define		CRC_START_64_WE		0xFFFFFFFFFFFFFFFFull
+#define		CRC_START_8			0x00
+#define		CRC_START_16			0x0000
+#define		CRC_START_MODBUS		0xFFFF
+#define		CRC_START_XMODEM		0x0000
+#define		CRC_START_CCITT_1D0F		0x1D0F
+#define		CRC_START_CCITT_FFFF		0xFFFF
+#define		CRC_START_CCITT32_FFFFFFFF	0xFFFFFFFFul
+#define		CRC_START_KERMIT		0x0000
+#define		CRC_START_SICK			0x0000
+#define		CRC_START_DNP			0x0000
+#define		CRC_START_32			0xFFFFFFFFul
+#define		CRC_START_64_ECMA		0x0000000000000000ull
+#define		CRC_START_64_WE			0xFFFFFFFFFFFFFFFFull
 
 /*
  * Prototype list of global functions
@@ -84,6 +86,7 @@ uint64_t		crc_64_ecma(        const unsigned char *input_str, size_t num_bytes  
 uint64_t		crc_64_we(          const unsigned char *input_str, size_t num_bytes       );
 uint16_t		crc_ccitt_1d0f(     const unsigned char *input_str, size_t num_bytes       );
 uint16_t		crc_ccitt_ffff(     const unsigned char *input_str, size_t num_bytes       );
+uint32_t		crc_ccitt32_ffffffff(     const unsigned char *input_str, size_t num_bytes       );
 uint16_t		crc_dnp(            const unsigned char *input_str, size_t num_bytes       );
 uint16_t		crc_kermit(         const unsigned char *input_str, size_t num_bytes       );
 uint16_t		crc_modbus(         const unsigned char *input_str, size_t num_bytes       );
@@ -94,6 +97,7 @@ uint16_t		update_crc_16(      uint16_t crc, unsigned char c                     
 uint32_t		update_crc_32(      uint32_t crc, unsigned char c                          );
 uint64_t		update_crc_64_ecma( uint64_t crc, unsigned char c                          );
 uint16_t		update_crc_ccitt(   uint16_t crc, unsigned char c                          );
+uint32_t		update_crc_ccitt32(   uint32_t crc, unsigned char c                          );
 uint16_t		update_crc_dnp(     uint16_t crc, unsigned char c                          );
 uint16_t		update_crc_kermit(  uint16_t crc, unsigned char c                          );
 uint16_t		update_crc_sick(    uint16_t crc, unsigned char c, unsigned char prev_byte );
