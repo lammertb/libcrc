@@ -18,3 +18,4 @@ tstcrc.exe
 tstcrc
 bin/prc.exe
 bin/prc
+*.o
