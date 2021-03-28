@@ -140,12 +140,32 @@ Make command options
 
 You can call make with options to change the behavior of the process.
 
+Using the CMake build system:
+
+cmake . 
+        creates Makefile in a style appropriate for your system
+
 make
-make all
+        creates both the library and the test program
+make install
+        installs the library
+
+make clean
+        cleans up object files, library file and textall executable
+rm -rf CMakeCache.txt
+	cleans up CMake cache file to reconfigure
+
+and/or
+
+Using the GNU make build system:
+make -f Makefile.crc
+make -f Makefile.crc all
 	creates both the library and the test program
 
 make clean
 	cleans up the object files, library file and testall executable
 
+TODO:
+make install
 
 Lammert Bies

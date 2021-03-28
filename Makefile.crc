@@ -1,6 +1,6 @@
 #
 # Library: libcrc
-# File:    Makefile
+# File:    Makefile.crc
 # Author:  Lammert Bies
 #
 # This file is licensed under the MIT License as stated below
@@ -55,6 +55,8 @@
 # routines and to avoid version and dependency issues when distributing the
 # end application to different environments.
 #
+
+MAKEFILE = Makefile.crc
 
 ifeq ($(OS),Windows_NT)
 
@@ -113,6 +115,7 @@ CFLAGS = -Wall -Wextra -Wstrict-prototypes -Wshadow -Wpointer-arith \
 	-Wcast-qual -Wcast-align -Wwrite-strings -Wredundant-decls \
 	-Wnested-externs -Werror -O3 \
 	-funsigned-char -I${INCDIR}
+PKG_CONFIG = pkg-config
 
 endif
 
@@ -168,7 +171,7 @@ testall${EXEEXT} :					\
 		${TSTDIR}${OBJDIR}testcrc${OBJEXT}	\
 		${TSTDIR}${OBJDIR}testnmea${OBJEXT}	\
 		${LIBDIR}libcrc${LIBEXT}		\
-		Makefile
+		${MAKEFILE}
 	${LINK} ${XFLAG}testall${EXEEXT}		\
 		${TSTDIR}${OBJDIR}testall${OBJEXT}	\
 		${TSTDIR}${OBJDIR}testcrc${OBJEXT}	\
@@ -185,7 +188,7 @@ ${BINDIR}prc${EXEEXT} :					\
 		${GENDIR}${OBJDIR}precalc${OBJEXT}	\
 		${GENDIR}${OBJDIR}crc32_table${OBJEXT}	\
 		${GENDIR}${OBJDIR}crc64_table${OBJEXT}	\
-		Makefile
+		${MAKEFILE}
 	${LINK}	${XFLAG}${BINDIR}prc${EXEEXT}		\
 		${GENDIR}${OBJDIR}precalc${OBJEXT}	\
 		${GENDIR}${OBJDIR}crc32_table${OBJEXT}	\
@@ -200,7 +203,7 @@ ${BINDIR}prc${EXEEXT} :					\
 tstcrc${EXEEXT} :					\
 		${EXADIR}${OBJDIR}tstcrc${OBJEXT}	\
 		${LIBDIR}libcrc${LIBEXT}		\
-		Makefile
+		${MAKEFILE}
 	${LINK}	${XFLAG}tstcrc${EXEEXT}			\
 		${EXADIR}${OBJDIR}tstcrc${OBJEXT}	\
 		${LIBDIR}libcrc${LIBEXT}
@@ -216,17 +219,19 @@ ${LIBDIR}libcrc${LIBEXT} :			\
 	${OBJDIR}crc16${OBJEXT}			\
 	${OBJDIR}crc32${OBJEXT}			\
 	${OBJDIR}crc64${OBJEXT}			\
+	${OBJDIR}crcccitt32${OBJEXT}            \
 	${OBJDIR}crcccitt${OBJEXT}		\
 	${OBJDIR}crcdnp${OBJEXT}		\
 	${OBJDIR}crckrmit${OBJEXT}		\
 	${OBJDIR}crcsick${OBJEXT}		\
 	${OBJDIR}nmea-chk${OBJEXT}		\
-	Makefile
+	${MAKEFILE}
 		${RM}        ${LIBDIR}libcrc${LIBEXT}
 		${AR} ${ARQC}${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crc16${OBJEXT}
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crc32${OBJEXT}
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crc64${OBJEXT}
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crc8${OBJEXT}
+		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crcccitt32${OBJEXT}
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crcccitt${OBJEXT}
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crcdnp${OBJEXT}
 		${AR} ${ARQ} ${LIBDIR}libcrc${LIBEXT} ${OBJDIR}crckrmit${OBJEXT}
@@ -256,6 +261,8 @@ ${OBJDIR}crc32${OBJEXT}			: ${SRCDIR}crc32.c ${INCDIR}checksum.h ${TABDIR}gentab
 
 ${OBJDIR}crc64${OBJEXT}			: ${SRCDIR}crc64.c ${INCDIR}checksum.h ${TABDIR}gentab64.inc
 
+${OBJDIR}crcccitt32${OBJEXT}		: ${SRCDIR}crcccitt32.c ${INCDIR}checksum.h
+
 ${OBJDIR}crcccitt${OBJEXT}		: ${SRCDIR}crcccitt.c ${INCDIR}checksum.h
 
 ${OBJDIR}crcdnp${OBJEXT}		: ${SRCDIR}crcdnp.c ${INCDIR}checksum.h
@@ -279,4 +286,6 @@ ${GENDIR}${OBJDIR}crc32_table${OBJEXT}	: ${GENDIR}crc32_table.c ${GENDIR}precalc
 ${GENDIR}${OBJDIR}crc64_table${OBJEXT}	: ${GENDIR}crc64_table.c ${GENDIR}precalc.h ${INCDIR}checksum.h
 
 ${GENDIR}${OBJDIR}precalc${OBJEXT}	: ${GENDIR}precalc.c ${GENDIR}precalc.h
+
+libcrc.pc                               : libcrc.pc.in
 
