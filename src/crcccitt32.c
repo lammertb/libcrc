@@ -29,6 +29,12 @@
  * -----------
  * The module src/crcccitt32.c contains routines which are used to calculate the
  * CCITT32 CRC values of a string of bytes.
+ * 
+ * based on makecrc http://github.com/dgilman/macutils
+ *
+ * Author:	Mark G. Mendel, 7/86
+ *		UUCP: ihnp4!umn-cs!hyper!mark, GEnie: mgm
+ *
  */
 
 #include <stdbool.h>
