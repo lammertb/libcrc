@@ -1,6 +1,6 @@
 # Libcrc API Reference
 
-### `crc_ccitt_ffff( input_str, num_bytes );`
+### `crc_ccitt32_ffffffff( input_str, num_bytes );`
 
 ### Parameters
 
