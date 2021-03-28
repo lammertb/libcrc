@@ -2,6 +2,8 @@
 .*.swp
 lib/*.lib
 lib/*.a
+lib/*.so
+lib/*.o
 obj/*.obj
 obj/*.o
 test/obj/*.obj
@@ -19,3 +21,12 @@ tstcrc
 bin/prc.exe
 bin/prc
 *.o
+*.so
+*.a
+*.lib
+*.pc
+Makefile
+install_manifest.txt
+CMakeCache.txt
+CMakeFiles/
+*.cmake
