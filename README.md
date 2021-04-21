@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/lammertb/libcrc.svg?branch=master)](https://travis-ci.com/lammertb/libcrc)
+
 # Libcrc - Multi platform MIT licensed CRC library in C
 
 Libcrc is a multi platform CRC library which has been under development since
