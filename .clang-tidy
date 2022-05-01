@@ -1,0 +1,79 @@
+---
+Checks:             >
+                    , clang-diagnostic-*
+                    , clang-analyzer-*
+                    , bugprone-*
+                    ,   -bugprone-easily-swappable-parameters
+                    ,   -bugprone-implicit-widening-of-multiplication-result
+                    ,   -bugprone-narrowing-conversions
+                    ,   -bugprone-reserved-identifier
+                    , cert-*
+                    ,   -cert-dcl37-c
+                    ,   -cert-dcl51-cpp
+                    ,   -cert-env33-c
+                    , concurrency-*
+                    , cppcoreguidelines-*
+                    ,   -cppcoreguidelines-avoid-c-arrays
+                    ,   -cppcoreguidelines-avoid-magic-numbers
+                    ,   -cppcoreguidelines-narrowing-conversions
+                    ,   -cppcoreguidelines-non-private-member-variables-in-classes
+                    ,   -cppcoreguidelines-owning-memory
+                    ,   -cppcoreguidelines-pro-bounds-array-to-pointer-decay
+                    ,   -cppcoreguidelines-pro-bounds-constant-array-index
+                    ,   -cppcoreguidelines-pro-type-union-access
+                    ,   -cppcoreguidelines-pro-type-vararg
+                    , google-*
+                    ,   -google-readability-todo
+                    , misc-*
+                    ,   -misc-non-private-member-variables-in-classes
+                    , modernize-*
+                    ,   -modernize-avoid-c-arrays
+                    ,   -modernize-use-override
+                    ,   -modernize-use-trailing-return-type
+                    , performance-*
+                    , portability-*
+                    , readability-*
+                    ,   -readability-avoid-const-params-in-decls
+                    ,   -readability-implicit-bool-conversion
+                    ,   -readability-magic-numbers
+                    ,   -readability-suspicious-call-argument
+WarningsAsErrors:   ''
+HeaderFilterRegex:  'acp_hub_[^/]*\.(h|hpp|hxx)$'
+FormatStyle:        file
+CheckOptions:
+  - key:             cert-dcl16-c.NewSuffixes
+    value:           'L;LL;LU;LLU'
+  - key:             cert-oop54-cpp.WarnOnlyIfThisHasSuspiciousField
+    value:           'false'
+  - key:             cert-str34-c.DiagnoseSignedUnsignedCharComparisons
+    value:           'false'
+  - key:             cppcoreguidelines-explicit-virtual-functions.IgnoreDestructors
+    value:           'true'
+  - key:             google-readability-braces-around-statements.ShortStatementLines
+    value:           '1'
+  - key:             google-readability-function-size.StatementThreshold
+    value:           '800'
+  - key:             google-readability-namespace-comments.SpacesBeforeComments
+    value:           '2'
+  - key:             google-readability-namespace-comments.ShortNamespaceLines
+    value:           '10'
+  - key:             llvm-else-after-return.WarnOnConditionVariables
+    value:           'false'
+  - key:             llvm-else-after-return.WarnOnUnfixable
+    value:           'false'
+  - key:             llvm-qualified-auto.AddConstToQualified
+    value:           'false'
+  - key:             modernize-loop-convert.MinConfidence
+    value:           reasonable
+  - key:             modernize-loop-convert.MaxCopySize
+    value:           '16'
+  - key:             modernize-loop-convert.NamingStyle
+    value:           CamelCase
+  - key:             modernize-replace-auto-ptr.IncludeStyle
+    value:           llvm
+  - key:             modernize-pass-by-value.IncludeStyle
+    value:           llvm
+  - key:             modernize-use-nullptr.NullMacros
+    value:           'NULL'
+
+...

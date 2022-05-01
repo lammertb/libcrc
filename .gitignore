@@ -19,3 +19,6 @@ tstcrc
 bin/prc.exe
 bin/prc
 *.o
+build
+compile_commands.json
+.vscode
