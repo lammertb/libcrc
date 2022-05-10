@@ -148,4 +148,130 @@ make clean
 	cleans up the object files, library file and testall executable
 
 
+CMake Toolchain
+===============
+
+**libcrc** could be built and installed with CMake, which gives cross-platform
+compatibility for all those platform where CMake can work.
+Configure process accepts all the standard arguments [cmake(1)](https://cmake.org/cmake/help/latest/manual/cmake.1.html) supports.
+
+CMake version `>= 3.12` is required.
+
+Compilers
+---------
+
+One can test build with different compilers providing them to the configuration step
+of CMake in one of the several ways:
+- [CMAKE_\<LANG>_COMPILER](https://cmake.org/cmake/help/latest/variable/CMAKE_LANG_COMPILER.html)
+   provided
+
+``` sh
+cmake .. -DCMAKE_C_COMPILER=clang
+```
+
+- toolchain files [CMAKE_TOOLCHAIN_FILE](https://cmake.org/cmake/help/latest/variable/CMAKE_TOOLCHAIN_FILE.html#variable:CMAKE_TOOLCHAIN_FILE)
+
+```sh
+cmake .. --toolchain=<file_name>
+```
+
+Generators
+----------
+
+CMake provides verity of different generators. Underlying generator has to be installed
+and available in `$PATH`
+
+```sh
+# for Linux/Unix
+cmake .. -G "Unix Makefiles"
+
+# for Windows
+cmake .. -G "Visual Studio 15 2017"
+```
+
+Options
+-------
+| Option                    | Default | Note                                                       |
+| ------------------------- | ------- | ---------------------------------------------------------- |
+| WITH_INCLUDE_WHAT_YOU_USE | OFF     | Dev: Validate correctness of `#include` directives [^1]    |
+| WITH_CLANG_TIDY           | OFF     | Dev: Run `clang-tidy` static code analysis [^2]            |
+| WITH_UNIT_TEST            | OFF     | Build unit tests                                           |
+| WITH_COVERAGE             | OFF     | Dev: Collects coverage metrics during tests execution [^3] |
+| WITH_EXAMPLE              | OFF     | Build examples                                             |
+
+
+Building ``libcrc``
+-------------------
+
+```sh
+mkdir build
+cd build
+cmake ..
+# optionally generator and build type can be specified
+# cmake .. -G "ninja" -DCMAKE_BUILD_TYPE=Debug
+# build
+cmake --build . --config Debug --target all -j 6
+```
+
+Building and running tests
+--------------------------
+
+```sh
+mkdir build
+cd build
+# configure with unit tests
+cmake .. -DWITH_UNIT_TEST=On
+# build
+cmake --build . --config Debug --target all -j 6
+# run tests
+cmake -VV
+```
+
+Installing
+----------
+
+```sh
+mkdir build
+cd build
+# configure, optionally provide install destination
+cmake .. -DCMAKE_INSTALL_PREFIX=<where_to_install>
+# build and install
+cmake --build . --config Debug --target install -j 6
+```
+
+Consuming ``libcrc`` in CMake project
+-------------------------------------
+
+If ``libcrc`` is built and installed via CMake toolchain it can be easily discovered
+and used within any CMake project
+
+```cmake
+# discover libcrc
+find_package(crc REQUIRED)
+
+add_executable(my_crc_consumer main.c)
+
+# my_crc_consumer will be linked against libcrc
+# and compiled with includes paths from libcrc installation
+target_link_libraries(my_crc_consumer
+	PRIVATE
+		crc::crc
+)
+```
+
+Consuming via ``pkg-config``
+----------------------------
+
+Using CMake toolchain one then can use ``libcrc`` with ``pkg-config``
+
+```sh
+cc `pkg-config --cflags --libs crc` -o main.c my_crc_consumer
+```
+
 Lammert Bies
+
+[^1]: requires ``include-what-you-use``
+
+[^2]: requires ``clang-tidy``
+
+[^3]: requires ``gcov`` or ``llvm-cov`` and ``gcovr``
