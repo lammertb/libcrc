@@ -1,3 +1,79 @@
+# Author: Vitalii Shylienkov <vshylienkov@gmail.com>
+# License: MIT
+# Copyright: (c) 2018-2022 Vitalii Shylienkov
+
+#[=============================================================================[.rst:
+FindClangTidy
+-------------
+
+Locates `clang-tidy <https://clang.llvm.org/extra/clang-tidy/index.html>`_,
+a clang-based C++ “linter” tool.
+
+
+Components
+^^^^^^^^^^
+
+This module doesn't support components
+
+Result variables
+^^^^^^^^^^^^^^^^
+This module will set the following variables in your project:
+
+    :cmake:variable:`ClangTidy_FOUND`,
+    :cmake:variable:`CLANGTIDY_FOUND`
+
+        Found ``ClangTidy`` package
+
+    :cmake:variable:`ClangTidy_EXECUTABLE`
+
+        Path to the ``clang-tidy`` executable
+
+    :cmake:variable:`ClangTidy_COMMAND`
+
+        String that has to be used to invoke ``clang-tidy``
+
+    :cmake:variable:`ClangTidy_VERSION_STRING`
+
+        ``clang-tidy`` full version string
+
+    :cmake:variable:`ClangTidy_VERSION_MAJOR`
+
+        ``clang-tidy`` major version
+
+    :cmake:variable:`ClangTidy_VERSION_MINOR`
+
+        ``clang-tidy`` minor version
+
+    :cmake:variable:`ClangTidy_VERSION_PATCH`
+
+        ``clang-tidy`` patch version
+
+Hints
+^^^^^
+
+The following variables may be set to provide hints to this module:
+
+    :cmake:variable:`ClangTidy_DIR`,
+    :cmake:variable:`CLANGTIDY_DIR`
+
+        Path to the installation root of ``clang-tidy``
+
+Environment variables with the same names will be also checked:
+
+    :cmake:envvar:`ClangTidy_DIR`,
+    :cmake:envvar:`CLANGTIDY_DIR`
+
+Example usage
+^^^^^^^^^^^^^
+
+.. code-block:: cmake
+
+    find_package(ClangTidy REQUIRED)
+
+    set(CMAKE_CXX_CLANG_TIDY "${ClangTidy_COMMAND}")
+
+#]=============================================================================]
+
 # includes ---------------------------------------------------------------------
 include(FeatureSummary)
 include(FindPackageHandleStandardArgs)
@@ -5,7 +81,7 @@ include(FindPackageHandleStandardArgs)
 # Internal variables -----------------------------------------------------------
 set(cfp_NAME "${CMAKE_FIND_PACKAGE_NAME}")
 string(TOUPPER "${cfp_NAME}" CFP_NAME)
-set(${cfp_NAME}_log_prefix "${cfp_NAME}:")
+set(_ClangTidy_log_prefix "${_cf_log_prefix}${cfp_NAME}:"  CACHE INTERNAL "FindClangTidy Log prefix")
 
 # Declare package properties ---------------------------------------------------
 set_package_properties(${cfp_NAME}
@@ -15,9 +91,9 @@ set_package_properties(${cfp_NAME}
 )
 
 # Validate find_package() arguments --------------------------------------------
-
+# No components supported
 if(${cfp_NAME}_FIND_COMPONENTS AND NOT ${cfp_NAME}_FIND_QUIETLY)
-    message(WARNING "${${cfp_NAME}_log_prefix} components not supported")
+    message(WARNING "${_ClangTidy_log_prefix} components not supported")
 endif()
 
 # Build list of names ----------------------------------------------------------
@@ -69,11 +145,20 @@ unset(suffix)
 unset(known_file_suffixes)
 unset(known_file_suffixes_major)
 
+# build list of hints
+set(${cfp_NAME}_hints "")
+foreach(dir ${cfp_NAME}_DIR ${CFP_NAME}_DIR)
+    if(DEFINED ${dir})
+        list(APPEND ${cfp_NAME}_hints "${${dir}}")
+    endif()
+endforeach()
+unset(dir)
+
 # Find binary ------------------------------------------------------------------
 
 find_program(${cfp_NAME}_EXECUTABLE
     NAMES           ${${cfp_NAME}_names}
-    HINTS           ${${cfp_NAME}_DIR} ${${CFP_NAME}_DIR}
+    HINTS           ${${cfp_NAME}_hints}
         ENV         ${cfp_NAME}_DIR
         ENV         ${CFP_NAME}_DIR
     PATH_SUFFIXES   bin
@@ -81,26 +166,27 @@ find_program(${cfp_NAME}_EXECUTABLE
 )
 
 unset(${cfp_NAME}_names)
+unset(${cfp_NAME}_hints)
 
 # Figure out the version -------------------------------------------------------
 
 if(${cfp_NAME}_EXECUTABLE)
-    set(${cfp_NAME}_COMMAND "${${cfp_NAME}_EXECUTABLE}")
+    set(${cfp_NAME}_COMMAND "${${cfp_NAME}_EXECUTABLE}" CACHE STRING "")
     mark_as_advanced(${cfp_NAME}_EXECUTABLE ${cfp_NAME}_COMMAND)
 
     execute_process(
-        COMMAND         ${${cfp_NAME}_EXECUTABLE} --version
+        COMMAND         ${${cfp_NAME}_COMMAND} --version
         RESULT_VARIABLE ${cfp_NAME}_version_result
         OUTPUT_VARIABLE ${cfp_NAME}_version_output
         ERROR_VARIABLE  ${cfp_NAME}_version_error
         OUTPUT_STRIP_TRAILING_WHITESPACE
     )
 
-    
+
     if(${${cfp_NAME}_version_result} EQUAL 0)
         if(${cfp_NAME}_version_output MATCHES "([0-9]+\.[0-9]+\.[0-9]+)")
             set(${cfp_NAME}_VERSION_STRING "${CMAKE_MATCH_1}")
-            
+
             string(REGEX REPLACE "([0-9]+)\\.[0-9]+\\.[0-9]+" "\\1"
                 ${cfp_NAME}_VERSION_MAJOR "${${cfp_NAME}_VERSION_STRING}"
             )
@@ -113,7 +199,7 @@ if(${cfp_NAME}_EXECUTABLE)
         endif()
     else()
         if(NOT ${cfp_NAME}_FIND_QUIETLY)
-            message(WARNING "${${cfp_NAME}_log_prefix}: version query failed: ${${cfp_NAME}_version_error}")
+            message(WARNING "${_ClangTidy_log_prefix}: version query failed: ${${cfp_NAME}_version_error}")
         endif()
     endif()
 
@@ -131,6 +217,5 @@ find_package_handle_standard_args(${cfp_NAME}
 )
 
 # clean-up ---------------------------------------------------------------------
-unset(${cfp_NAME}_log_prefix)
 unset(CFP_NAME)
 unset(cfp_NAME)
